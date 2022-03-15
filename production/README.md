@@ -59,4 +59,5 @@ Using previous experience (or asking someone with previous experience), we can d
 | `SMP-RunIISummer20UL18SIM-00002`        | simulation data                                                    | GENSIM     |
 | `SMP-RunIISummer20UL18wmLHEGEN-00002`   | LHE simulation data                                                | LHEGENSIM  |
 
-We can now click the second button from the left (a circle with a downward-pointing arrow) to get the setup shell script for each step.
+We can now click the second button from the left (a circle with a :arrow_down:) to get the setup shell script for each step.
+These scripts can also be used to deduce the order of the steps in the production chain.
