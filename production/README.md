@@ -49,14 +49,14 @@ We can instead search for just the campaign tag `RunIISummer20UL18` to find the 
 We see now that the metadata is incomplete: the DIGIPremix, HLT, SIM, and wmLHEGEN steps are all missing values in the "Input dataset" and "Output dataset" columns.
 Using previous experience (or asking someone with previous experience), we can deduce the order of the full production chain:
 
-| Prepid (`PAG-CampaignDataTier-index`)   | Description                                                        |
-| --------------------------------------- | ------------------------------------------------------------------ |
-| `SMP-RunIISummer20UL18NanoAODv9-00047`  | ultra-slim NanoAOD data tier that we want to use                   |
-| `SMP-RunIISummer20UL18MiniAODv2-00047`  | semi-slim MiniAOD data tier (closer to "raw" detector information) |
-| `SMP-RunIISummer20UL18RECO-00002`       | reconstructed simulation data                                      |
-| `SMP-RunIISummer20UL18DIGIPremix-00002` | "digitized" simulation data                                        |
-| `SMP-RunIISummer20UL18HLT-00002`        | simulation data that passes the HLT                                |
-| `SMP-RunIISummer20UL18SIM-00002`        | simulation data                                                    |
-| `SMP-RunIISummer20UL18wmLHEGEN-00002`   | LHE simulation data                                                |
+| Prepid (`PAG-CampaignDataTier-index`)   | Description                                                        | Data Tier  |
+| --------------------------------------- | ------------------------------------------------------------------ | ---------- |
+| `SMP-RunIISummer20UL18NanoAODv9-00047`  | ultra-slim data tier that we want to use                           | NANOAODSIM |
+| `SMP-RunIISummer20UL18MiniAODv2-00047`  | semi-slim data tier                                                | MINIAODSIM |
+| `SMP-RunIISummer20UL18RECO-00002`       | reconstructed simulation data                                      | AODSIM     |
+| `SMP-RunIISummer20UL18HLT-00002`        | simulation data that passes the HLT                                | GENSIMRAW  |
+| `SMP-RunIISummer20UL18DIGIPremix-00002` | "digitized" simulation data                                        | GENSIMDIGI |
+| `SMP-RunIISummer20UL18SIM-00002`        | simulation data                                                    | GENSIM     |
+| `SMP-RunIISummer20UL18wmLHEGEN-00002`   | LHE simulation data                                                | LHEGENSIM  |
 
 We can now click the second button from the left (a circle with a downward-pointing arrow) to get the setup shell script for each step.
