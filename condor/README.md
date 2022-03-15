@@ -45,11 +45,11 @@ We can search for `Summer20UL18MiniAODv2` to find it amongst our page of results
 Again, only one row corresponds to the 2018 MiniAODv2 production.
 Repeating this process, we find that the MiniAODv2 sample was produced from a RECO sample.
 However, if we try to find what the RECO sample was produced from, we come across a convenient dead end: the "Input dataset" column for the RECO sample is empty!
-We can instead, however, search for just the campaign tag `RunIISummer20UL18` to find the rest of the samples in the production chain.
-We see here that the metadata is incomplete: the DIGIPremix, HLT, SIM, and wmLHEGEN steps are all missing values in the "Input dataset" and "Output dataset" columns.
-Using previous experience (or asking someone with previous experience), however, we can deduce the order of the full production chain:
+We can instead search for just the campaign tag `RunIISummer20UL18` to find the rest of the samples in the production chain.
+We see now that the metadata is incomplete: the DIGIPremix, HLT, SIM, and wmLHEGEN steps are all missing values in the "Input dataset" and "Output dataset" columns.
+Using previous experience (or asking someone with previous experience), we can deduce the order of the full production chain:
 
-| Prepid (`PAG-DataTier-index`)           | Description                                                        |
+| Prepid (`PAG-CampaignDataTier-index`)   | Description                                                        |
 | --------------------------------------- | ------------------------------------------------------------------ |
 | `SMP-RunIISummer20UL18NanoAODv9-00047`  | ultra-slim NanoAOD data tier that we want to use                   |
 | `SMP-RunIISummer20UL18MiniAODv2-00047`  | semi-slim MiniAOD data tier (closer to "raw" detector information) |
