@@ -378,7 +378,7 @@ make_gridpack () {
     #################################
     #Add PDF info and copy run card #
     #################################
-    script_dir="${PRODHOME}/utilities/scripts"
+    script_dir="${PRODHOME}/utilities"
     
     prepare_run_card $name $CARDSDIR $is5FlavorScheme $script_dir
     
@@ -555,7 +555,7 @@ make_gridpack () {
       pdfExtraArgs+="--is5FlavorScheme "
     fi 
     
-    pdfSysArgs=$(python ${script_dir}/getMG5_aMC_PDFInputs.py -f systematics -c 2017 $pdfExtraArgs)
+    pdfSysArgs=$(python ${script_dir}/python/getMG5_aMC_PDFInputs.py -f systematics -c 2017 $pdfExtraArgs)
     sed -i s/PDF_SETS_REPLACE/${pdfSysArgs}/g runcmsgrid.sh
     
     
