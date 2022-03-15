@@ -48,12 +48,15 @@ However, if we try to find what the RECO sample was produced from, we come acros
 We can instead, however, search for just the campaign tag `RunIISummer20UL18` to find the rest of the samples in the production chain.
 We see here that the metadata is incomplete: the DIGIPremix, HLT, SIM, and wmLHEGEN steps are all missing values in the "Input dataset" and "Output dataset" columns.
 Using previous experience (or asking someone with previous experience), however, we can deduce the order of the full production chain:
-    - `SMP-RunIISummer20UL18NanoAODv9-00047`: the ultra-slim NanoAOD data tier that we want to use
-    - `SMP-RunIISummer20UL18MiniAODv2-00047`: the semi-slim MiniAOD data tier (closer to "raw" detector information)
-    - `SMP-RunIISummer20UL18RECO-00002`: the reconstructed simulation data
-    - `SMP-RunIISummer20UL18DIGIPremix-00002`: the "digitized" simulation data
-    - `SMP-RunIISummer20UL18HLT-00002`: the simulation data that passes the HLT
-    - `SMP-RunIISummer20UL18SIM-00002`: the simulation data
-    - `SMP-RunIISummer20UL18wmLHEGEN-00002`: the LHE simulation data
+
+| Prepid (`PAG-DataTier-index`)           | Description                                                        |
+| --------------------------------------- | ------------------------------------------------------------------ |
+| `SMP-RunIISummer20UL18NanoAODv9-00047`  | ultra-slim NanoAOD data tier that we want to use                   |
+| `SMP-RunIISummer20UL18MiniAODv2-00047`  | semi-slim MiniAOD data tier (closer to "raw" detector information) |
+| `SMP-RunIISummer20UL18RECO-00002`       | reconstructed simulation data                                      |
+| `SMP-RunIISummer20UL18DIGIPremix-00002` | "digitized" simulation data                                        |
+| `SMP-RunIISummer20UL18HLT-00002`        | simulation data that passes the HLT                                |
+| `SMP-RunIISummer20UL18SIM-00002`        | simulation data                                                    |
+| `SMP-RunIISummer20UL18wmLHEGEN-00002`   | LHE simulation data                                                |
 
 We can now click the second button from the left (a circle with a downward-pointing arrow) to get the setup shell script for each step.
