@@ -14,3 +14,9 @@ cp WpToLNu_4f_LO/WpToLNu_4f_LO_proc_card.dat PROCESS_4f_LO/PROCESS_4f_LO_proc_ca
 ```
 ./gridpack_generation.sh PROCESS_4f_LO cards/PROCESS_4f_LO local
 ```
+3. Check that the gridpack is good
+4. Clean up
+```
+rm -rf PROCESS_4f_LO
+rm -rf PROCESS_4f_LO.log
+```
