@@ -14,7 +14,16 @@ cp WpToLNu_4f_LO/WpToLNu_4f_LO_proc_card.dat PROCESS_4f_LO/PROCESS_4f_LO_proc_ca
 ```
 ./gridpack_generation.sh PROCESS_4f_LO cards/PROCESS_4f_LO local
 ```
-3. Check that the gridpack is good
+3. Check that the gridpack is good; the following command should produce and LHE file
+```
+mkdir temp
+cd temp
+tar xf ../PROCESS_4f_LO_slc7_amd64_gcc700_CMSSW_10_6_0_tarball.tar.xz # contains runcmsgrid.sh
+./runcmsgrid.sh $NEVENTS $RANDOMSEED $NCPU
+head cmsgrid_final.lhe # make sure that the file has content
+cd ..
+rm -rf temp
+```
 4. Clean up
 ```
 rm -rf PROCESS_4f_LO
