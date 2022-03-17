@@ -49,15 +49,39 @@ We can instead search for just the campaign tag `RunIISummer20UL18` to find the 
 We see now that the metadata is incomplete: the DIGIPremix, HLT, SIM, and wmLHEGEN steps are all missing values in the "Input dataset" and "Output dataset" columns.
 Using previous experience (or asking someone with previous experience), we can deduce the order of the full production chain:
 
-| Prepid (`PAG-CampaignDataTier-index`)   | Description                                                        | Data Tier  |
-| --------------------------------------- | ------------------------------------------------------------------ | ---------- |
-| `SMP-RunIISummer20UL18NanoAODv9-00047`  | ultra-slim data tier that we want to use                           | NANOAODSIM |
-| `SMP-RunIISummer20UL18MiniAODv2-00047`  | semi-slim data tier                                                | MINIAODSIM |
-| `SMP-RunIISummer20UL18RECO-00002`       | reconstructed simulation data                                      | AODSIM     |
-| `SMP-RunIISummer20UL18HLT-00002`        | simulation data that passes the HLT                                | GENSIMRAW  |
-| `SMP-RunIISummer20UL18DIGIPremix-00002` | "digitized" simulation data                                        | GENSIMDIGI |
-| `SMP-RunIISummer20UL18SIM-00002`        | simulation data                                                    | GENSIM     |
-| `SMP-RunIISummer20UL18wmLHEGEN-00002`   | LHE simulation data                                                | LHEGENSIM  |
+| Step       | Prepid (`PAG-CampaignStep-index`)       | Description                                                        | Data Tier  |
+| ---------- | --------------------------------------- | ------------------------------------------------------------------ | ---------- |
+| wmLHEGEN   | `SMP-RunIISummer20UL18wmLHEGEN-00002`   | LHE simulation data                                                | LHEGENSIM  |
+| SIM        | `SMP-RunIISummer20UL18SIM-00002`        | simulation data                                                    | GENSIM     |
+| DIGIPremix | `SMP-RunIISummer20UL18DIGIPremix-00002` | "digitized" simulation data                                        | GENSIMDIGI |
+| HLT        | `SMP-RunIISummer20UL18HLT-00002`        | simulation data that passes the HLT                                | GENSIMRAW  |
+| RECO       | `SMP-RunIISummer20UL18RECO-00002`       | reconstructed simulation data                                      | AODSIM     |
+| MiniAODv2  | `SMP-RunIISummer20UL18MiniAODv2-00047`  | semi-slim data tier                                                | MINIAODSIM |
+| NanoAODv9  | `SMP-RunIISummer20UL18NanoAODv9-00047`  | ultra-slim data tier that we want to use                           | NANOAODSIM |
 
-We can now click the second button from the left (a circle with a :arrow_down:) to get the setup shell script for each step.
+We can now click the third button from the left (a :heavy_check_mark: in a circle) to get the setup shell script for each step.
 These scripts can also be used to deduce the order of the steps in the production chain.
+Even better, however, these scripts can be used to create all of the CMSSW "psets" needed to actually _run_ the production chain ourselves!
+
+## 3. Building the production chain
+Our goal is to construct a shell script that runs `cmsDriver.py` for each step in the production chain; this will produce the psets we are after.
+We must start with the wmLHEGEN step. 
+Somewhere in the setup shell script for this step that we found earlier, we should see something like the following line:
+```bash
+# Download fragment from McM
+curl -s -k https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/SMP-RunIISummer20UL18wmLHEGEN-00002 --retry 3 --create-dirs -o Configuration/GenProduction/python/SMP-RunIISummer20UL18wmLHEGEN-00002-fragment.py
+[ -s Configuration/GenProduction/python/SMP-RunIISummer20UL18wmLHEGEN-00002-fragment.py ] || exit $?;
+```
+We can run something like this line ourselves to retrieve this "fragment" (a CMSSW python script) for each campaign:
+```
+curl -s -k https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/SMP-RunIISummer20UL18wmLHEGEN-00002 -o wmLHEGS_RunIISummer20UL18.py
+curl -s -k https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/SMP-RunIISummer20UL17wmLHEGEN-00001 -o wmLHEGS_RunIISummer20UL17.py
+curl -s -k https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/SMP-RunIISummer20UL16wmLHEGENAPV-00019 -o wmLHEGS_RunIISummer20UL16APV.py
+curl -s -k https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/SMP-RunIISummer20UL16wmLHEGEN-00002 -o wmLHEGS_RunIISummer20UL16.py
+```
+We should then check these fragments against each other: they should be identical.
+If this is true, we can then check any one of them against the generic fragment `fragment.py` in this repository.
+The only difference should be in the `sed` "placeholder" strings `VARIABLE_SED_PLACEHOLDER`.
+If this is true, we can proceed.
+Otherwise, we will have to make a new generic fragment, taking care to place `sed` placeholders where appropriate.
+In the example case we have been using, `fragment.py` is sufficient.
