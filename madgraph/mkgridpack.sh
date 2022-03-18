@@ -38,7 +38,7 @@ make_tarball () {
     if [ -e $CARDSDIR/${name}_externaltarball.dat ]; then
         EXTRA_TAR_ARGS="${name}_externaltarball.dat header_for_madspin.txt"
     fi
-    XZ_OPT="$XZ_OPT" tar -cJpsf ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz mgbasedir process runcmsgrid.sh gridpack_generation*.log InputCards $EXTRA_TAR_ARGS
+    XZ_OPT="$XZ_OPT" tar -cJpsf ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz mgbasedir process runcmsgrid.sh mkgridpack*.log InputCards $EXTRA_TAR_ARGS
 
     echo "Gridpack created successfully at ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz"
     echo "End of job"
@@ -495,9 +495,9 @@ make_gridpack () {
       cd $WORKDIR
       
     #   echo "creating debug tarball"
-    #   cp ${LOGFILE} ./gridpack_generation.log
+    #   cp ${LOGFILE} ./mkgridpack.log
     #   DEBUGTARBALL=${name}_debug_tarball.tar.gz
-    #   tar -czps --ignore-failed-read -f ${DEBUGTARBALL} processtmp gridpack_generation.log
+    #   tar -czps --ignore-failed-read -f ${DEBUGTARBALL} processtmp mkgridpack.log
     #   echo "moving tarball to ${PRODHOME}/${DEBUGTARBALL}"
     #   mv ${DEBUGTARBALL} ${PRODHOME}/${DEBUGTARBALL}
     #   set -e
@@ -707,7 +707,7 @@ if [ "${name}" != "interactive" ]; then
     echo "Saving log file(s)"
     cd $WORKDIR/gridpack
     for i in ${LOGFILE_NAME}*.log; do 
-        cp $i ${i/$LOGFILE_NAME/gridpack_generation}
+        cp $i ${i/$LOGFILE_NAME/mkgridpack}
     done
 else
     make_gridpack

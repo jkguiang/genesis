@@ -12,7 +12,7 @@ cp WpToLNu_4f_LO/WpToLNu_4f_LO_proc_card.dat PROCESS_4f_LO/PROCESS_4f_LO_proc_ca
 ```
 2. Create a gridpack
 ```
-./gridpack_generation.sh PROCESS_4f_LO cards/PROCESS_4f_LO local
+./mkgridpack.sh PROCESS_4f_LO cards/PROCESS_4f_LO local
 ```
 3. Check that the gridpack is good; the following command should produce and LHE file
 ```
@@ -29,3 +29,4 @@ rm -rf temp
 rm -rf PROCESS_4f_LO
 rm -rf PROCESS_4f_LO.log
 ```
+5. Move the gridpack to Ceph (if it's large enough)
