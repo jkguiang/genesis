@@ -64,6 +64,10 @@ cmsDriver.py \
 
 # == DIGIPREMIX ==================================
 # Prepid: SMP-RunIISummer20UL18DIGIPremix-00002 
+# Pileup: /Neutrino_E-10_gun/RunIISummer20ULPrePremix-UL18_106X_upgrade2018_realistic_v11_L1v1-v2/PREMIX
+RANDOM_PILEUPFILES=$(shuf -n 5 $SCRIPT_DIR/pileup_files_RunIISummer20UL18.txt | tr '\n' ',') 
+RANDOM_PILEUPFILES=${RANDOM_PILEUPFILES::-1} # trim last comma
+
 setup_cmssw CMSSW_10_6_17_patch1 slc7_amd64_gcc700
 cmsDriver.py \
     --python_filename DIGIPremix_${CAMPAIGN}_cfg.py \
@@ -71,7 +75,7 @@ cmsDriver.py \
     --customise Configuration/DataProcessing/Utils.addMonitoring \
     --datatier GEN-SIM-DIGI \
     --fileout file:DIGIPremix_${CAMPAIGN}.root \
-    --pileup_input "dbs:/Neutrino_E-10_gun/RunIISummer20ULPrePremix-UL18_106X_upgrade2018_realistic_v11_L1v1-v2/PREMIX" \
+    --pileup_input $RANDOM_PILEUPFILES \
     --conditions 106X_upgrade2018_realistic_v11_L1v1 \
     --step DIGI,DATAMIX,L1,DIGI2RAW \
     --procModifiers premix_stage2 \
