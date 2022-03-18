@@ -1,0 +1,72 @@
+#!/bin/bash
+function print_help() {
+    echo "usage: ./mkpsets [OPTIONAL ARGS] --gridpack GRIDPACK --campaign CAMPAIGN"
+    echo ""
+    echo "Create the psets for a given campaign production chain"
+    echo ""
+    echo "required arguments:"
+    echo "  -g, --gridpack GRIDPACK      full path to gridpack"
+    echo "  -c, --campaign CAMPAIGN      campaign to generate"
+    echo ""
+    echo "optional arguments:"
+    echo "  -h, --help                   display this message"
+    echo "  -f, --fragment FRAGMENT      full path to fragment"
+    echo "  -n, --n_events N_EVENTS      number of events to generate"
+    echo ""
+    exit 0
+}
+
+FRAGMENT=$PWD/fragment.py
+GRIDPACK=""
+N_EVENTS=100
+CAMPAIGN=""
+
+# Read the CLI options
+TEMP=`getopt -o hf:g:n:c: --long help,fragment:,gridpack:,n_events:,campaign: -- "$@"`
+eval set -- "$TEMP"
+# Extract options and their arguments
+ttreename="Events"
+classname="Selector"
+while true; do
+    case "$1" in
+        -h|--help)
+            print_help; shift 1;;
+        -f|--fragment)
+            FRAGMENT=$2; shift 2;;
+        -g|--gridpack)
+            GRIDPACK=$2; shift 2;;
+        -n|--n_events)
+            N_EVENTS=$2; shift 2;;
+        -c|--campaign)
+            CAMPAIGN=$2; shift 2;;
+        --) shift; break;;
+        *) echo "Internal error!"; exit 1;;
+    esac
+done
+
+if [[ "$GRIDPACK" == "" ]]; then
+    echo "ERROR: no gridpack provided"
+    exit 1
+elif [[ ! -f $GRIDPACK ]]; then
+    echo "ERROR: gridpack $GRIDPACK does not exist"
+    exit 1
+fi
+
+if [[ "$CAMPAIGN" == "" ]]; then
+    echo "ERROR: no campaign specified"
+    exit 1
+fi
+
+LS_SCRIPTDIR=($(ls $PWD/scripts/*${CAMPAIGN}*))
+if [[ "${LS_SCRIPTDIR[@]}" == "" ]]; then
+    echo "ERROR: no maker for $CAMPAIGN found in scripts/"
+    exit 1
+elif [[ "${#LS_SCRIPTDIR[@]}" != "1" ]]; then
+    echo "ERROR: more than one maker for $CAMPAIGN found in scripts/"
+    exit 1
+else
+    mkdir -p psets/$CAMPAIGN
+    cd psets/$CAMPAIGN
+    sh ${LS_SCRIPTDIR[0]} $FRAGMENT $GRIDPACK $N_EVENTS
+    cd ../..
+fi
