@@ -89,3 +89,20 @@ Now, we want to selectively copy the parts of this shell script that we need.
 We can look at the scripts in the `scripts` directory for examples.
 By stringing these together, we can create all of the psets that we need for a given production campaign.
 Then, we can submit Condor jobs to ultimately run all of the steps.
+
+When we reach the DIGIPremix step, we notice this `cmsDriver.py` parameter:
+```
+--pileup_input "dbs:/Neutrino_E-10_gun/RunIISummer20ULPrePremix-UL18_106X_upgrade2018_realistic_v11_L1v1-v2/PREMIX"
+```
+This points to a dataset of around 50,000 files of pre-generated pileup events.
+However, it is sufficient to just pass in a randomly selected handful of these files instead.
+To do this, we first need to get the list of these files:
+```
+dasgoclient -query="file dataset=/Neutrino_E-10_gun/RunIISummer20ULPrePremix-UL18_106X_upgrade2018_realistic_v11_L1v1-v2/PREMIX" > pileup_files_RunIISummer20UL18.txt
+```
+Then, we can select 5 random files using the following lines:
+```
+# Grab 5 random files, exchanging '\n' characters for ','
+RANDOM_PILEUPFILES=$(shuf -n 5 pileup_files_RunIISummer20UL18.txt | tr '\n' ',') 
+RANDOM_PILEUPFILES=${RANDOM_PILEUPFILES::-1} # trim last comma
+```
