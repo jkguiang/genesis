@@ -18,3 +18,18 @@ function setup_cmssw {
         return
     fi
 }
+
+function inject_fragment {
+    FRAGMENT=$1
+    GRIDPACK=$2
+    EVENTS=$3
+    # Copy fragment to the appropriate area
+    mkdir -p Configuration/GenProduction/python/
+    FRAGMENT_CMSSW=Configuration/GenProduction/python/$(basename $FRAGMENT)
+    cp $FRAGMENT $FRAGMENT_CMSSW
+    # Insert gridpack path info fragment
+    GRIDPACK_ESC=$(echo $GRIDPACK | sed 's_/_\\/_g') # escape slashes in gridpack path
+    sed -i "s/GRIDPACK_SED_PLACEHOLDER/$GRIDPACK_ESC/g" $FRAGMENT_CMSSW
+    sed -i "s/NEVENTS_SED_PLACEHOLDER/$EVENTS/g" $FRAGMENT_CMSSW
+    echo "$FRAGMENT_CMSSW"
+}

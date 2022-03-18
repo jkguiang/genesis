@@ -10,19 +10,11 @@ EVENTS=$3
 # == GEN,LHE =====================================
 # Prepid: SMP-RunIISummer20UL17wmLHEGEN-00001
 setup_cmssw CMSSW_10_6_17_patch1 slc7_amd64_gcc700 --no_scramb
-
-# Copy fragment to the appropriate area
-FRAGMENT_PATH=Configuration/GenProduction/python/$FRAGMENT
-cp fragments/wmLHEGS_${CAMPAIGN}.py $FRAGMENT_PATH
-# Insert gridpack path info fragment
-GRIDPACK_ESC=$(echo $GRIDPACK | sed 's_/_\\/_g') # escape slashes in gridpack path
-sed -i "s/GRIDPACK_SED_PLACEHOLDER/$GRIDPACK/g" $CMSSW_VERSION/src/$FRAGMENT_PATH
-sed -i "s/NEVENTS_SED_PLACEHOLDER/$EVENTS/g" $CMSSW_VERSION/src/$FRAGMENT_PATH
-
+FRAGMENT_CMSSW=$(inject_fragment $FRAGMENT $GRIDPACK $EVENTS)
 scram b -j8
 cd ../..
 
-cmsDriver.py $FRAGMENT_PATH \
+cmsDriver.py $FRAGMENT_CMSSW \
     --python_filename LHEGS_${CAMPAIGN}_cfg.py \
     --eventcontent RAWSIM,LHE \
     --customise Configuration/DataProcessing/Utils.addMonitoring \
