@@ -85,3 +85,7 @@ The only difference should be in the `sed` "placeholder" strings `VARIABLE_SED_P
 If this is true, we can proceed.
 Otherwise, we will have to make a new generic fragment, taking care to place `sed` placeholders where appropriate.
 In the example case we have been using, `fragment.py` is sufficient.
+Now, we want to selectively copy the parts of this shell script that we need.
+We can look at the scripts in the `scripts` directory for examples.
+By stringing these together, we can create all of the psets that we need for a given production campaign.
+Then, we can submit Condor jobs to ultimately run all of the steps.
