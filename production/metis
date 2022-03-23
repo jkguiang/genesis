@@ -8,39 +8,44 @@ from metis.StatsParser import StatsParser
 from metis.Utils import good_sites
 from metis.Sample import DummySample
 
-cli = argparse.ArgumentParser(description="Submit NanoAOD-skimming condor jobs")
-cli.add_argument(
-    "--debug",
-    action="store_true",
-    help="Run in debug mode"
+# formatter = lambda prog: argparse.HelpFormatter(prog, width=120, max_help_position=40)
+formatter = lambda prog: argparse.ArgumentDefaultsHelpFormatter(prog, width=120, max_help_position=40)
+
+cli = argparse.ArgumentParser(
+    description="Submit NanoAOD-skimming condor jobs", 
+    formatter_class=formatter
 )
 cli.add_argument(
-    "--tag", type=str, required=True,
-    help="Unique tag for submissions"
+    "--debug", action="store_true", default=argparse.SUPPRESS,
+    help="run in debug mode"
 )
 cli.add_argument(
-    "--nevents", type=int, required=True,
-    help="Number of events to generate per job"
+    "-t", "--tag", type=str, required=True, default=argparse.SUPPRESS,
+    help="unique tag for identifying output from these jobs"
 )
 cli.add_argument(
-    "--njobs", type=int, required=True,
-    help="Number of jobs to run"
+    "-g", "--gridpack", type=str, required=True, default=argparse.SUPPRESS,
+    help="full path to gridpack tarball, e.g. /path/to/gridpack.tar.gz"
 )
 cli.add_argument(
-    "--gridpack", type=str, required=True,
-    help="/path/to/gridpack.tar.gz"
+    "-c", "--campaign", type=str, required=True, default=argparse.SUPPRESS,
+    help="reconstruction campaign to generate"
 )
 cli.add_argument(
-    "--campaign", type=str, required=True,
-    help="Reconstruction campaign to generate"
+    "--nevents", type=int, default=100,
+    help="number of events to generate per job"
 )
 cli.add_argument(
-    "--sites", type=str, nargs="*", default=good_sites,
-    help="Space-separated list of T2 sites"
+    "--njobs", type=int, default=1,
+    help="number of jobs to run"
+)
+cli.add_argument(
+    "--sites", type=str, nargs="*", default=list(good_sites),
+    help="space-separated list of T2 sites"
 )
 cli.add_argument(
     "--n_monit_hrs", type=int, default=48,
-    help="Number of hours to run Metis for"
+    help="number of hours to run Metis for"
 )
 args = cli.parse_args()
 
@@ -59,19 +64,13 @@ if not os.path.isfile(package):
 condor_submit_params = {
     "sites": ",".join(args.sites), 
     "classads": [
-        ["param_nevents", events_per_job],
+        ["param_nevents", args.nevents],
         ["param_campaign", args.campaign],
         ["metis_extraargs", ""],
         ["JobBatchName", "VBS_VH_Inclusive"]
     ],
     "requirements_line": "Requirements = (HAS_SINGULARITY=?=True)"
 }
-
-if args.debug:
-    samples = samples[:1]
-    max_jobs = 1
-else:
-    max_jobs = 0
 
 dataset="/{0}/{1}/NANOGEN".format(NAME, args.campaign)
 
@@ -88,7 +87,6 @@ for _ in range(n_updates): # update every 30 mins
         input_executable="scripts/condor_executable_metis.sh", # your condor executable here
         tarfile=package, # your tarfile with assorted goodies here
         special_dir="{0}/{1}".format(NAME, args.tag), # output files into /ceph/cms/store/<user>/<special_dir>
-        max_jobs=max_jobs,
         arguments=args.gridpack
     )
     # Set task summary
