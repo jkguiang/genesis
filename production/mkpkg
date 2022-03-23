@@ -9,6 +9,7 @@ if [ "$CAMPAIGN" == "" ]; then
     for dir in $(find scripts/* -type d); do
         echo $(basename $dir)
     done
+    exit 1
 elif [ ! -d scripts/$CAMPAIGN ]; then
     echo "ERROR: no scripts for $CAMPAIGN found"
     exit 1
@@ -19,4 +20,5 @@ else
         scripts/utils.sh \
         scripts/$CAMPAIGN/*
     echo "Done"
+    exit 0
 fi
