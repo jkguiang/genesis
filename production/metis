@@ -3,6 +3,7 @@
 import argparse
 import time
 import os
+from subprocess import Popen, PIPE
 from metis.CondorTask import CondorTask
 from metis.StatsParser import StatsParser
 from metis.Utils import good_sites
@@ -53,6 +54,11 @@ NAME = "VBSVHSignalGeneration"
 
 if not os.path.isfile(args.gridpack):
     print("ERROR: {} does not exist!".format(args.gridpack))
+    exit()
+
+tarball = Popen(["sh", "mkpkg", args.campaign], stdout=PIPE, stderr=PIPE)
+success = tarball.wait()
+if not success:
     exit()
 
 package = "{}.tar.gz".format(args.campaign)
