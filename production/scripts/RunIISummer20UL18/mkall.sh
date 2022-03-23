@@ -61,6 +61,7 @@ cmsDriver.py \
     -n $EVENTS
 
 if [[ "$NORUN" != "true" ]]; then cmsRun SIM_${CAMPAIGN}_cfg.py; fi
+rm LHEGS_${CAMPAIGN}.root
 # == SIM =========================================
 
 # == DIGIPREMIX ==================================
@@ -90,6 +91,7 @@ cmsDriver.py \
     -n $EVENTS
 
 if [[ "$NORUN" != "true" ]]; then cmsRun DIGIPremix_${CAMPAIGN}_cfg.py; fi
+rm SIM_${CAMPAIGN}.root
 # == DIGIPREMIX ==================================
 
 # == HLT =========================================
@@ -112,6 +114,7 @@ cmsDriver.py \
     -n $EVENTS
 
 if [[ "$NORUN" != "true" ]]; then cmsRun HLT_${CAMPAIGN}_cfg.py; fi
+rm DIGIPremix_${CAMPAIGN}.root
 # == HLT =========================================
 
 # == RECO ========================================
@@ -134,6 +137,7 @@ cmsDriver.py \
     -n $EVENTS
 
 if [[ "$NORUN" != "true" ]]; then cmsRun RECO_${CAMPAIGN}_cfg.py; fi
+rm HLT_${CAMPAIGN}.root
 # == RECO ========================================
 
 # == MiniAODv2 ===================================
@@ -157,6 +161,7 @@ cmsDriver.py \
     -n $EVENTS
 
 if [[ "$NORUN" != "true" ]]; then cmsRun MiniAODv2_${CAMPAIGN}_cfg.py; fi
+rm RECO_${CAMPAIGN}.root
 # == MiniAODv2 ===================================
 
 
