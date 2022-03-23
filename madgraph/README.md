@@ -1,4 +1,3 @@
-# Instructions
 All of the code here is taken from the 2022 CMSDAS [example](https://github.com/agrohsje/genproductions/tree/cmsdas2020).
 However, it has been consolidated for simplicity.
 In addition, though Madgraph is used here, it is installed automatically in the gridpack generation step.
