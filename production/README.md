@@ -86,9 +86,9 @@ If this is true, we can proceed.
 Otherwise, we will have to make a new generic fragment, taking care to place `sed` placeholders where appropriate.
 In the example case we have been using, `fragment.py` is sufficient.
 Now, we want to selectively copy the parts of this shell script that we need.
-We can look at the scripts in the `scripts` directory for examples.
-By stringing these together, we can create all of the psets that we need for a given production campaign.
-Then, we can submit Condor jobs to ultimately run all of the steps.
+By stringing these together, we can create and run all of the psets that we need for a given production campaign.
+Then, we can submit Condor jobs to ultimately run everything.
+We can look at the scripts in the `scripts/RunIISummer20UL18` directory as an example.
 
 When we reach the DIGIPremix step, we notice this `cmsDriver.py` parameter:
 ```
@@ -98,11 +98,47 @@ This points to a dataset of around 50,000 files of pre-generated pileup events.
 However, it is sufficient to just pass in a randomly selected handful of these files instead.
 To do this, we first need to get the list of these files:
 ```
-dasgoclient -query="file dataset=/Neutrino_E-10_gun/RunIISummer20ULPrePremix-UL18_106X_upgrade2018_realistic_v11_L1v1-v2/PREMIX" > pileup_files_RunIISummer20UL18.txt
+dasgoclient -query="file dataset=/Neutrino_E-10_gun/RunIISummer20ULPrePremix-UL18_106X_upgrade2018_realistic_v11_L1v1-v2/PREMIX" > pileup_files.txt
 ```
 Then, we can select 5 random files using the following lines:
 ```
 # Grab 5 random files, exchanging '\n' characters for ','
-RANDOM_PILEUPFILES=$(shuf -n 5 pileup_files_RunIISummer20UL18.txt | tr '\n' ',') 
+RANDOM_PILEUPFILES=$(shuf -n 5 pileup_files | tr '\n' ',') 
 RANDOM_PILEUPFILES=${RANDOM_PILEUPFILES::-1} # trim last comma
+```
+Again, see the examples in the `scripts` directory for how to include this in the pset generation.
+
+# 4. Run Condor jobs
+Once we have finished writing the equivalent scripts to those found in one of the campaigns in the `scripts` directory, we can start running our Condor jobs.
+First, we can tar up everything we need with a handy script included in this repository:
+```
+$ ./mkpkg RunIISummer20UL18
+Tarring up the following files into RunIISummer20UL18.tar.xz...
+fragment.py
+scripts/utils.sh
+scripts/RunIISummer20UL18/mkall.sh
+scripts/RunIISummer20UL18/pileup_files.txt
+Done
+```
+Then, we can simply run our [ProjectMetis](https://github.com/aminnj/ProjectMetis) script:
+```
+$ ./metis -h
+usage: metis [-h] [--debug] --tag TAG --nevents NEVENTS --njobs NJOBS
+             --gridpack GRIDPACK --campaign CAMPAIGN
+             [--sites [SITES [SITES ...]]] [--n_monit_hrs N_MONIT_HRS]
+
+Submit NanoAOD-skimming condor jobs
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --debug               Run in debug mode
+  --tag TAG             Unique tag for submissions
+  --nevents NEVENTS     Number of events to generate per job
+  --njobs NJOBS         Number of jobs to run
+  --gridpack GRIDPACK   /path/to/gridpack.tar.gz
+  --campaign CAMPAIGN   Reconstruction campaign to generate
+  --sites [SITES [SITES ...]]
+                        Space-separated list of T2 sites
+  --n_monit_hrs N_MONIT_HRS
+                        Number of hours to run Metis for
 ```
