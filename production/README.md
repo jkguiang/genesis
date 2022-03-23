@@ -14,7 +14,7 @@ One such saample is the VBS WZ sample:
 *Disclaimer*: DIS has a ``chain" option that we can potentially use to skip McM alltogether. 
 However, we will proceed with the central tool (McM) in case DIS has incomplete information--CMS does not always maintain perfect metadata, which DIS relies on.
 
-## 2. Using McM
+## 2. Use McM
 We proceed to [McM](https://cms-pdmv.cern.ch/mcm/), enter the dataset name (`WZJJ_EWK_InclusivePolarization_TuneCP5_13TeV_madgraph-madspin-pythia8`) into the "...by dataset name" field, and click the "Search" button.
 The interface is... less than perfect, but we must proceed with courage. 
 
@@ -63,7 +63,7 @@ We can now click the third button from the left (a :heavy_check_mark: in a circl
 These scripts can also be used to deduce the order of the steps in the production chain.
 Even better, however, these scripts can be used to create all of the CMSSW "psets" needed to actually _run_ the production chain ourselves!
 
-## 3. Building the production chain
+## 3. Build the production chain
 Our goal is to construct a shell script that runs `cmsDriver.py` for each step in the production chain; this will produce the psets we are after.
 We must start with the wmLHEGEN step. 
 Somewhere in the setup shell script for this step that we found earlier, we should see something like the following line:
@@ -108,7 +108,7 @@ RANDOM_PILEUPFILES=${RANDOM_PILEUPFILES::-1} # trim last comma
 ```
 Again, see the examples in the `scripts` directory for how to include this in the pset generation.
 
-# 4. Run Condor jobs
+## 4. Run Condor jobs
 Once we have finished writing the equivalent scripts to those found in one of the campaigns in the `scripts` directory, we can start running our Condor jobs.
 First, we can tar up everything we need with a handy script included in this repository:
 ```
