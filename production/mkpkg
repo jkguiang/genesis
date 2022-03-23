@@ -1,0 +1,22 @@
+#! /bin/bash
+CAMPAIGN=$1
+
+if [ -f ${CAMPAIGN}.tar.xz ]; then
+    rm ./${CAMPAIGN}.tar.xz
+fi
+if [ "$CAMPAIGN" == "" ]; then
+    echo "ERROR: no campaign specified; these campaigns have been detected:"
+    for dir in $(find scripts/* -type d); do
+        echo $(basename $dir)
+    done
+elif [ ! -d scripts/$CAMPAIGN ]; then
+    echo "ERROR: no scripts for $CAMPAIGN found"
+    exit 1
+else
+    echo "Tarring up the following files into ${CAMPAIGN}.tar.xz..."
+    tar -vhcJf ${CAMPAIGN}.tar.xz \
+        fragment.py \
+        scripts/utils.sh \
+        scripts/$CAMPAIGN/*
+    echo "Done"
+fi
