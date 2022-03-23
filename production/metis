@@ -1,0 +1,103 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*
+import argparse
+import time
+import os
+from metis.CondorTask import CondorTask
+from metis.StatsParser import StatsParser
+from metis.Utils import good_sites
+from metis.Sample import DummySample
+
+cli = argparse.ArgumentParser(description="Submit NanoAOD-skimming condor jobs")
+cli.add_argument(
+    "--debug",
+    action="store_true",
+    help="Run in debug mode"
+)
+cli.add_argument(
+    "--tag", type=str, required=True,
+    help="Unique tag for submissions"
+)
+cli.add_argument(
+    "--nevents", type=int, required=True,
+    help="Number of events to generate per job"
+)
+cli.add_argument(
+    "--njobs", type=int, required=True,
+    help="Number of jobs to run"
+)
+cli.add_argument(
+    "--gridpack", type=str, required=True,
+    help="/path/to/gridpack.tar.gz"
+)
+cli.add_argument(
+    "--campaign", type=str, required=True,
+    help="Reconstruction campaign to generate"
+)
+cli.add_argument(
+    "--sites", type=str, nargs="*", default=good_sites,
+    help="Space-separated list of T2 sites"
+)
+cli.add_argument(
+    "--n_monit_hrs", type=int, default=48,
+    help="Number of hours to run Metis for"
+)
+args = cli.parse_args()
+
+NAME = "VBSVHSignalGeneration"
+
+if not os.path.isfile(args.gridpack):
+    print("ERROR: {} does not exist!".format(args.gridpack))
+    exit()
+
+package = "{}.tar.gz".format(args.campaign)
+if not os.path.isfile(package):
+    print("ERROR: {} does not exist!".format(package))
+    exit()
+
+# Assemble condor_submit parameters
+condor_submit_params = {
+    "sites": ",".join(args.sites), 
+    "classads": [
+        ["param_nevents", events_per_job],
+        ["param_campaign", args.campaign],
+        ["metis_extraargs", ""],
+        ["JobBatchName", "VBS_VH_Inclusive"]
+    ],
+    "requirements_line": "Requirements = (HAS_SINGULARITY=?=True)"
+}
+
+if args.debug:
+    samples = samples[:1]
+    max_jobs = 1
+else:
+    max_jobs = 0
+
+dataset="/{0}/{1}/NANOGEN".format(NAME, args.campaign)
+
+total_summary = {}
+n_updates = args.n_monit_hrs*2 if args.n_monit_hrs > 0 else 1
+for _ in range(n_updates): # update every 30 mins
+    # Collect tasks
+    task = CondorTask(
+        sample = DummySample(dataset=dataset, N=args.njobs, nevents=args.nevents),
+        files_per_output=1,
+        output_name="output.root",
+        tag=args.tag,
+        condor_submit_params=condor_submit_params,
+        input_executable="scripts/condor_executable_metis.sh", # your condor executable here
+        tarfile=package, # your tarfile with assorted goodies here
+        special_dir="{0}/{1}".format(NAME, args.tag), # output files into /ceph/cms/store/<user>/<special_dir>
+        max_jobs=max_jobs,
+        arguments=args.gridpack
+    )
+    # Set task summary
+    if not task.complete():
+        task.process()
+    total_summary[task.get_sample().get_datasetname()] = task.get_task_summary()
+    if args.debug:
+        break
+    # Update monitoring GUI
+    StatsParser(data=total_summary, webdir="~/public_html/{}_metis".format(NAME.lower())).do()
+    # Wait 30 minutes
+    time.sleep(30*60)
