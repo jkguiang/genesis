@@ -34,6 +34,8 @@ make_tarball () {
     mkdir InputCards
     cp $CARDSDIR/${name}*.* InputCards
 
+    chmod +x runcmsgrid.sh
+
     EXTRA_TAR_ARGS=""
     if [ -e $CARDSDIR/${name}_externaltarball.dat ]; then
         EXTRA_TAR_ARGS="${name}_externaltarball.dat header_for_madspin.txt"
