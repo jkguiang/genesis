@@ -33,3 +33,10 @@ function inject_fragment {
     sed -i "s/NEVENTS_SED_PLACEHOLDER/$EVENTS/g" $FRAGMENT_CMSSW
     echo "$FRAGMENT_CMSSW"
 }
+
+function set_lhegs_seed {
+    LHEGS_PSET=$1
+    SEED=$2
+    echo "process.RandomNumberGeneratorService.externalLHEProducer.initialSeed = $SEED" >> $LHEGS_PSET
+    echo "process.source.firstLuminosityBlock = cms.untracked.uint32($SEED)" >> $LHEGS_PSET
+}
