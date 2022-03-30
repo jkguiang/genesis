@@ -56,12 +56,17 @@ if not os.path.isfile(args.gridpack):
     print("ERROR: {} does not exist!".format(args.gridpack))
     exit()
 
-tarball = Popen(["sh", "mkpkg", args.campaign], stdout=PIPE, stderr=PIPE)
-success = tarball.wait()
-if not success:
-    exit()
-
+# Delete old package
 package = "{}.tar.gz".format(args.campaign)
+if os.path.isfile(package):
+    os.remove(package)
+# Make new package
+tarball = Popen(["sh", "mkpkg", args.campaign], stdout=PIPE, stderr=PIPE)
+exit_code = tarball.wait()
+if exit_code != 0:
+    print("ERROR: sh mkpkg {} failed".format(args.campaign))
+    exit()
+# Check that is was made
 if not os.path.isfile(package):
     print("ERROR: {} does not exist!".format(package))
     exit()
