@@ -170,7 +170,7 @@ rm RECO_${CAMPAIGN}.root
 setup_cmssw CMSSW_10_6_26 slc7_amd64_gcc700
 cmsDriver.py \
     --python_filename NanoAODv9_${CAMPAIGN}_cfg.py \
-    --eventcontent NANOEDMAODSIM \
+    --eventcontent NANOAODSIM \
     --customise Configuration/DataProcessing/Utils.addMonitoring \
     --datatier NANOAODSIM \
     --fileout file:NanoAODv9_${CAMPAIGN}.root \

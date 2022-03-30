@@ -32,10 +32,7 @@ cmsDriver.py $FRAGMENT_CMSSW \
     --mc \
     -n $EVENTS
 
-cat >> LHEGS_${CAMPAIGN}_cfg.py << EOL
-process.RandomNumberGeneratorService.externalLHEProducer.initialSeed = $SEED
-process.source.firstLuminosityBlock = cms.untracked.uint32($SEED)
-EOL
+set_lhegs_seed LHEGS_${CAMPAIGN}_cfg.py $SEED
 
 if [[ "$NORUN" != "true" ]]; then cmsRun LHEGS_${CAMPAIGN}_cfg.py; fi
 # == GEN,LHE =====================================
@@ -170,7 +167,7 @@ rm RECO_${CAMPAIGN}.root
 setup_cmssw CMSSW_10_6_26 slc7_amd64_gcc700
 cmsDriver.py \
     --python_filename NanoAODv9_${CAMPAIGN}_cfg.py \
-    --eventcontent NANOEDMAODSIM \
+    --eventcontent NANOAODSIM \
     --customise Configuration/DataProcessing/Utils.addMonitoring \
     --datatier NANOAODSIM \
     --fileout file:NanoAODv9_${CAMPAIGN}.root \
