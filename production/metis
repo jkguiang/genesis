@@ -17,7 +17,7 @@ cli = argparse.ArgumentParser(
     formatter_class=formatter
 )
 cli.add_argument(
-    "--debug", action="store_true", default=argparse.SUPPRESS,
+    "--debug", action="store_true",
     help="run in debug mode"
 )
 cli.add_argument(
@@ -78,12 +78,12 @@ condor_submit_params = {
         ["param_nevents", args.nevents],
         ["param_campaign", args.campaign],
         ["metis_extraargs", ""],
-        ["JobBatchName", "VBS_VH_Inclusive"]
+        ["JobBatchName", "VBS_VH_Inclusive_{}".format(args.campaign)]
     ],
     "requirements_line": "Requirements = (HAS_SINGULARITY=?=True)"
 }
 
-dataset="/{0}/{1}/NANOGEN".format(NAME, args.campaign)
+dataset="/VBS_VH_Inclusive/{}-106X_privateMC/NANOGEN".format(args.campaign)
 
 total_summary = {}
 n_updates = args.n_monit_hrs*2 if args.n_monit_hrs > 0 else 1
