@@ -32,10 +32,7 @@ cmsDriver.py $FRAGMENT_CMSSW \
     --mc \
     -n $EVENTS
 
-cat >> LHEGS_${CAMPAIGN}_cfg.py << EOL
-process.RandomNumberGeneratorService.externalLHEProducer.initialSeed = $SEED
-process.source.firstLuminosityBlock = cms.untracked.uint32($SEED)
-EOL
+set_lhegs_seed LHEGS_${CAMPAIGN}_cfg.py $SEED
 
 if [[ "$NORUN" != "true" ]]; then cmsRun LHEGS_${CAMPAIGN}_cfg.py; fi
 # == GEN,LHE =====================================
@@ -44,7 +41,7 @@ if [[ "$NORUN" != "true" ]]; then cmsRun LHEGS_${CAMPAIGN}_cfg.py; fi
 # Prepid: SMP-RunIISummer20UL16SIM-00020
 setup_cmssw CMSSW_10_6_17_patch1 slc7_amd64_gcc700
 cmsDriver.py \
-    --python_filename SIM_${CAMPAIGN}.py \
+    --python_filename SIM_${CAMPAIGN}_cfg.py \
     --eventcontent RAWSIM \
     --customise Configuration/DataProcessing/Utils.addMonitoring \
     --datatier GEN-SIM \

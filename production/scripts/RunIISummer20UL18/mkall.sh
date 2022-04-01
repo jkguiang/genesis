@@ -32,10 +32,7 @@ cmsDriver.py $FRAGMENT_CMSSW \
     --mc \
     -n $EVENTS
 
-cat >> LHEGS_${CAMPAIGN}_cfg.py << EOL
-process.RandomNumberGeneratorService.externalLHEProducer.initialSeed = $SEED
-process.source.firstLuminosityBlock = cms.untracked.uint32($SEED)
-EOL
+set_lhegs_seed LHEGS_${CAMPAIGN}_cfg.py $SEED
 
 if [[ "$NORUN" != "true" ]]; then cmsRun LHEGS_${CAMPAIGN}_cfg.py; fi
 # == GEN,LHE =====================================

@@ -126,7 +126,7 @@ cmsDriver.py \
     --conditions 106X_mc2017_realistic_v6 \
     --step RAW2DIGI,L1Reco,RECO,RECOSIM \
     --geometry DB:Extended \
-    --filein file:DIGIPremix_${CAMPAIGN}.root \
+    --filein file:HLT_${CAMPAIGN}.root \
     --era Run2_2017 \
     --runUnscheduled \
     --no_exec \

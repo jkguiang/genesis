@@ -32,10 +32,7 @@ cmsDriver.py $FRAGMENT_CMSSW \
     --mc \
     -n $EVENTS
 
-cat >> LHEGS_${CAMPAIGN}_cfg.py << EOL
-process.RandomNumberGeneratorService.externalLHEProducer.initialSeed = $SEED
-process.source.firstLuminosityBlock = cms.untracked.uint32($SEED)
-EOL
+set_lhegs_seed LHEGS_${CAMPAIGN}_cfg.py $SEED
 
 if [[ "$NORUN" != "true" ]]; then cmsRun LHEGS_${CAMPAIGN}_cfg.py; fi
 # == GEN,LHE =====================================
@@ -67,7 +64,7 @@ rm LHEGS_${CAMPAIGN}.root
 # == DIGIPREMIX ==================================
 # Prepid: SMP-RunIISummer20UL16DIGIPremixAPV-00014
 # Pileup: /Neutrino_E-10_gun/RunIISummer20ULPrePremix-UL16_106X_mcRun2_asymptotic_v13-v1/PREMIX
-RANDOM_PILEUPFILES=$(shuf -n 5 $SCRIPT_DIR/pileup_files_RunIISummer20UL16.txt | tr '\n' ',') 
+RANDOM_PILEUPFILES=$(shuf -n 5 $SCRIPT_DIR/pileup_files.txt | tr '\n' ',') 
 RANDOM_PILEUPFILES=${RANDOM_PILEUPFILES::-1} # trim last comma
 
 setup_cmssw CMSSW_10_6_17_patch1 slc7_amd64_gcc700
