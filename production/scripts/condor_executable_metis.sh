@@ -22,8 +22,8 @@ function setup_chirp {
     # Note, in the home directory
         mkdir chirpdir
         mv condor_chirp chirpdir/
-        export PATH="$PATH:$(pwd)/chirpdir"
-        echo "[chirp] Found and put condor_chirp into $(pwd)/chirpdir"
+        export PATH="$PATH:${PWD}/chirpdir"
+        echo "[chirp] Found and put condor_chirp into ${PWD}/chirpdir"
     elif [ -e /usr/libexec/condor/condor_chirp ]; then
         export PATH="$PATH:/usr/libexec/condor"
         echo "[chirp] Found condor_chirp in /usr/libexec/condor"
@@ -39,7 +39,7 @@ function chirp {
     echo "[chirp] Chirped $1 => $2 with exit code $ret"
 }
 
-function stageout {
+function fancy_gfal_copy {
     COPY_SRC=$1
     COPY_DEST=$2
     retries=0
@@ -50,9 +50,9 @@ function stageout {
         env -i X509_USER_PROXY=${X509_USER_PROXY} gfal-copy -p -f -t 7200 --verbose --checksum ADLER32 ${COPY_SRC} ${COPY_DEST}
         COPY_STATUS=$?
         if [ $COPY_STATUS -ne 0 ]; then
-            echo "Failed stageout attempt $((retries+1))"
+            echo "Failed fancy_gfal_copy attempt $((retries+1))"
         else
-            echo "Successful stageout with $retries retries"
+            echo "Successful fancy_gfal_copy with $retries retries"
             break
         fi
         retries=$[$retries+1]
@@ -118,6 +118,12 @@ tar xf *.gz
 setup_chirp
 setup_environment
 
+export REP="/store"
+
+COPY_SRC="davs://redirector.t2.ucsd.edu:1095/${GRIDPACK/\/ceph\/cms\/store/$REP}"
+COPY_DEST="file://${PWD}/$(basename $GRIDPACK)"
+fancy_gfal_copy $COPY_SRC $COPY_DEST
+
 echo "before running: ls -lrth"
 ls -lrth
 
@@ -125,7 +131,9 @@ echo -e "\n--- begin running ---\n" #                           <----- section d
 
 chirp ChirpMetisStatus "before_cmsRun"
 
-sh scripts/${CAMPAIGN}/mkall.sh $PWD/fragment.py $GRIDPACK $NEVENTS $IFILE
+if [[ -f $PWD/$(basename $GRIDPACK) ]]; then
+    sh scripts/${CAMPAIGN}/mkall.sh $PWD/fragment.py $PWD/$(basename $GRIDPACK) $NEVENTS $IFILE
+fi
 
 CMSRUN_STATUS=$?
 
@@ -136,7 +144,7 @@ ls -lrth
 
 if [[ $CMSRUN_STATUS != 0 ]]; then
     echo "Removing output file because cmsRun crashed with exit code $?"
-    rm NanoAODv9_${CAMPAIGN}.root
+    rm *.root
     exit 1
 fi
 
@@ -157,15 +165,18 @@ chirp ChirpMetisStatus "before_copy"
 echo "Local output dir"
 echo ${OUTPUTDIR}
 
-export REP="/store"
 OUTPUTDIR="${OUTPUTDIR/\/ceph\/cms\/store/$REP}"
 
 echo "Final output path for xrootd:"
 echo ${OUTPUTDIR}
 
-COPY_SRC="file://`pwd`/NanoAODv9_${CAMPAIGN}.root"
+COPY_SRC="file://${PWD}/MiniAODv2_${CAMPAIGN}.root"
+COPY_DEST="davs://redirector.t2.ucsd.edu:1095/${OUTPUTDIR/NANOGEN/MINIGEN}/${OUTPUTNAME}_${IFILE}.root"
+fancy_gfal_copy $COPY_SRC $COPY_DEST
+
+COPY_SRC="file://${PWD}/NanoAODv9_${CAMPAIGN}.root"
 COPY_DEST="davs://redirector.t2.ucsd.edu:1095/${OUTPUTDIR}/${OUTPUTNAME}_${IFILE}.root"
-stageout $COPY_SRC $COPY_DEST
+fancy_gfal_copy $COPY_SRC $COPY_DEST
 
 echo -e "\n--- end copying output ---\n" #                      <----- section division
 
