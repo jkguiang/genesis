@@ -1,0 +1,24 @@
+ORIG_DIR=$PWD
+
+GRIDPACK=$1
+if [[ $GRIDPACK != /* ]]; then
+    GRIDPACK=$ORIG_DIR/$GRIDPACK
+fi
+
+N_EVENTS=$2
+if [[ "$N_EVENTS" = "" ]]; then
+    N_EVENTS=100
+fi
+
+SEED=$3
+if [[ "$SEED" = "" ]]; then
+    SEED=1
+fi
+
+echo "$GRIDPACK"
+
+TEST_DIR=${GRIDPACK%_slc*}
+TEST_DIR=$ORIG_DIR/${TEST_DIR##*/}
+mkdir -p $TEST_DIR; cd $TEST_DIR
+tar -xaf $GRIDPACK
+./runcmsgrid.sh $N_EVENTS $SEED 1
