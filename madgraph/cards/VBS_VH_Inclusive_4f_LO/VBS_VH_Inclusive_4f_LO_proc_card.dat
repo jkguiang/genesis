@@ -1,9 +1,0 @@
-import model sm-ckm
-#switch to diagonal ckm matrix if relevant for speed
-#import model sm-lepton_masses
-
-define V = w+ w- z
-
-generate p p > j j V h
-
-output VBS_VH_Inclusive_4f_LO -nojpeg
