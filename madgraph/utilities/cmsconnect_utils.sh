@@ -19,7 +19,7 @@ cmssw_setup() {
     basedir=$PWD
     # Keep track of release sandbox version
     # Warning: This trusts the sandbox name has the format: ${card_name}_output.tar.xz
-    # and that the work area created by mkgridpack.sh is ${card_name}_gridpack
+    # and that the work area created by make_gridpack is ${card_name}_gridpack
     rel="${1%%_output.tar.*}_gridpack"
     #rel=$(dirname $(tar -tvjf "${SANDBOX_HOME}/$1" | head -1 | awk '{print $NF}'))
     #if [ $rel == "." ]; then

@@ -40,7 +40,7 @@ make_tarball () {
     if [ -e $CARDSDIR/${name}_externaltarball.dat ]; then
         EXTRA_TAR_ARGS="${name}_externaltarball.dat header_for_madspin.txt"
     fi
-    XZ_OPT="$XZ_OPT" tar -cJpsf ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz mgbasedir process runcmsgrid.sh mkgridpack*.log InputCards $EXTRA_TAR_ARGS
+    XZ_OPT="$XZ_OPT" tar -cJpsf ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz mgbasedir process runcmsgrid.sh make_gridpack*.log InputCards $EXTRA_TAR_ARGS
 
     echo "Gridpack created successfully at ${PRODHOME}/${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz"
     echo "End of job"
@@ -502,9 +502,9 @@ make_gridpack () {
       cd $WORKDIR
       
     #   echo "creating debug tarball"
-    #   cp ${LOGFILE} ./mkgridpack.log
+    #   cp ${LOGFILE} ./make_gridpack.log
     #   DEBUGTARBALL=${name}_debug_tarball.tar.gz
-    #   tar -czps --ignore-failed-read -f ${DEBUGTARBALL} processtmp mkgridpack.log
+    #   tar -czps --ignore-failed-read -f ${DEBUGTARBALL} processtmp make_gridpack.log
     #   echo "moving tarball to ${PRODHOME}/${DEBUGTARBALL}"
     #   mv ${DEBUGTARBALL} ${PRODHOME}/${DEBUGTARBALL}
     #   set -e
@@ -589,7 +589,7 @@ make_gridpack () {
 }
 
 print_help () {
-    echo "usage: ./mkgridpack CARDSDIR [OPTIONAL ARGS]"
+    echo "usage: ./make_gridpack CARDSDIR [OPTIONAL ARGS]"
     echo ""
     echo "Make a gridpack"
     echo ""
@@ -747,7 +747,7 @@ if [ "${name}" != "interactive" ]; then
     echo "Saving log file(s)"
     cd $WORKDIR/gridpack
     for i in ${LOGFILE_NAME}*.log; do 
-        cp $i ${i/$LOGFILE_NAME/mkgridpack}
+        cp $i ${i/$LOGFILE_NAME/make_gridpack}
     done
 else
     make_gridpack
