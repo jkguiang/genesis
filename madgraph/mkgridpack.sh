@@ -54,7 +54,7 @@ make_gridpack () {
     echo "System release " `cat /etc/redhat-release` #And the system release
     
     echo "name: ${name}"
-    echo "carddir: ${carddir}"
+    echo "cardsdir: ${cardsdir}"
     echo "queue: ${queue}"
     echo "scram_arch: ${scram_arch}"
     echo "cmssw_version: ${cmssw_version}"
@@ -200,6 +200,11 @@ make_gridpack () {
           fi
         done
       fi
+      if [ -d $MODELSDIR ]; then
+        for model in $(ls -d $MODELSDIR/*); do
+          cp -R $model models/$(basename $model)
+        done
+      fi
     
       cd $WORKDIR
       
@@ -212,7 +217,7 @@ make_gridpack () {
       echo `pwd`
     
     
-      if [ -z ${carddir} ]; then
+      if [ -z ${cardsdir} ]; then
         echo "Card directory not provided"
         if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 1; else exit 1; fi
       fi
@@ -332,7 +337,7 @@ make_gridpack () {
         fi
       fi
       
-      if [ -z ${carddir} ]; then
+      if [ -z ${cardsdir} ]; then
         echo "Card directory not provided"
         if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 1; else exit 1; fi
       fi
@@ -583,27 +588,68 @@ make_gridpack () {
     fi
 }
 
+print_help () {
+    echo "usage: ./mkgridpack CARDSDIR [OPTIONAL ARGS]"
+    echo ""
+    echo "Make a gridpack"
+    echo ""
+    echo "required arguments:"
+    echo "  CARDSDIR                     directory containing Madgraph process/run cards"
+    echo ""
+    echo "optional arguments:"
+    echo "  -h, --help                   display this message"
+    echo "  -n, --name NAME              process/card name (default: basename of cards dir)"
+    echo "  -m, --modelsdir MODELSDIR    directory containing Madgraph models"
+    echo "  -q, --queue QUEUE            which queue (default: 'local')"
+    echo "  -j, --jobstep JOBSTEP        processing options (default: 'ALL'; allowed: 'ALL','CODEGEN',"
+    echo "                               'INTEGRATE', 'MADSPIN')"
+    echo "  --scram SCRAM                which SCRAM architecture to use (default: slc7_amd64_gcc700)"
+    echo "  --cmssw CMSSW                which CMSSW version to use (default: CMSSW_10_6_0)"
+    echo ""
+    exit 0
+}
+
 #exit on first error
 set -e
 
 #First you need to set couple of settings:
 
-name=${1}
-
-# name of the run
-carddir=${2}
-
-# which queue
-queue=${3}
-
-# processing options
-jobstep=${4}
-
-if [ -n "$5" ]
-  then
-    scram_arch=${5}
-  else
-    scram_arch=slc7_amd64_gcc700 #slc6_amd64_gcc630 
+# Read the CLI options
+TEMP=`getopt -o hn:m:q:j: --long help,name:,modelsdir:,queue:,jobstep:,scram:,cmssw: -- "$@"`
+eval set -- "$TEMP"
+# Extract options and their arguments
+name=""
+modelsdir=""
+queue=""
+jobstep="ALL"
+scram_arch=slc7_amd64_gcc700 # old: slc6_amd64_gcc630 
+cmssw_version=CMSSW_10_6_0   # old: CMSSW_9_3_8
+while true; do
+    case "$1" in
+        -h|--help)
+            print_help; shift 1;;
+        -n|--name)
+            name=$2; shift 2;;
+        -m|--modelsdir)
+            modelsdir=$2; shift 2;;
+        -q|--queue)
+            queue=$2; shift 2;;
+        -j|--jobstep)
+            jobstep=$2; shift 2;;
+        --scram)
+            scram_arch=$2; shift 2;;
+        --cmssw)
+            cmssw_version=$2; shift 2;;
+        --) shift; break;;
+        *) echo "Internal error!"; exit 1;;
+    esac
+done
+cardsdir=$1
+if [[ "$cardsdir" == "" ]]; then
+    echo "ERROR: no cards directory given"
+fi
+if [[ "$name" == "" ]]; then
+    name=$(basename $cardsdir)
 fi
 
 # Require OS and scram_arch to be consistent
@@ -613,15 +659,6 @@ if { [[ $SYSTEM_RELEASE == *"release 6"* ]] && [[ $scram_arch == *"slc7"* ]]; } 
   if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 1; else exit 1; fi
 fi
 
-if [ -n "$6" ]
-  then
-    cmssw_version=${6}
-  else
-    cmssw_version=CMSSW_10_6_0 #CMSSW_9_3_8
-fi
- 
-# jobstep can be 'ALL','CODEGEN', 'INTEGRATE', 'MADSPIN'
-
 if [ -z "$PRODHOME" ]; then
   PRODHOME=`pwd`
 fi 
@@ -629,7 +666,6 @@ fi
 # Folder structure is different on CMSConnect
 helpers_dir=${PRODHOME}/utilities
 source ${helpers_dir}/gridpack_helpers.sh 
-
 
 if [ ! -z ${CMSSW_BASE} ]; then
   echo "Error: This script must be run in a clean environment as it sets up CMSSW itself.  You already have a CMSSW environment set up for ${CMSSW_VERSION}."
@@ -641,7 +677,7 @@ fi
 set -u
 
 if [ -z ${name} ]; then
-  echo "Process/card name not provided"
+  echo "ERROR: process/card name not provided"
   if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 1; else exit 1; fi
 fi
 
@@ -657,13 +693,13 @@ fi
 if [ "${jobstep}" == "ALL" ] || [ "${jobstep}" == "CODEGEN" ] || [ "${jobstep}" == "INTEGRATE" ] || [ "${jobstep}" == "MADSPIN" ]; then
     echo "Running gridpack generation step ${jobstep}"
 else
-    echo "No Valid Job Step specified, exiting "
+    echo "ERROR: no Valid Job Step specified, exiting "
     if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 1; else exit 1; fi
 fi 
 
 # @TODO: MADSPIN hasn't been split from INTEGRATE step yet. Just exit for now.
 if  [ "${jobstep}" == "MADSPIN" ]; then
-    echo "MADSPIN hasn't been split from INTEGRATE step yet. Doing nothing. "
+    echo "ERROR: MADSPIN hasn't been split from INTEGRATE step yet. Doing nothing. "
     if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 1; else exit 1; fi
 fi 
 
@@ -675,7 +711,9 @@ LOGFILE_NAME=${LOGFILE/.log/}
 # where to search for datacards, that have to follow a naming code: 
 #   ${name}_proc_card_mg5.dat
 #   ${name}_run_card.dat
-CARDSDIR=${PRODHOME}/${carddir}
+CARDSDIR=${PRODHOME}/${cardsdir}
+# where to search for models (subdirectories)
+MODELSDIR=${PRODHOME}/${modelsdir}
 # the folder where the script works, I guess
 GEN_FOLDER=${RUNHOME}/${name}
 
