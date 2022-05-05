@@ -18,7 +18,7 @@ fi
 echo "$GRIDPACK"
 
 TEST_DIR=${GRIDPACK%_slc*}
-TEST_DIR=$ORIG_DIR/${TEST_DIR##*/}
+TEST_DIR=$ORIG_DIR/tests/${TEST_DIR##*/}
 mkdir -p $TEST_DIR; cd $TEST_DIR
 tar -xaf $GRIDPACK
 ./runcmsgrid.sh $N_EVENTS $SEED 1
