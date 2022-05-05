@@ -368,6 +368,8 @@ make_gridpack () {
     
     if [ ! -d ${name} ]; then
       echo "Process output directory ${name} not found.  Either process generation failed, or the name of the output did not match the process name ${name} provided to the script."
+      echo "Here's what I do see:"
+      echo $(ls -a)
       if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 1; else exit 1; fi
     fi
     
