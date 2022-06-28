@@ -1,0 +1,5 @@
+import model HHVBF_UFO
+
+generate p p > z z h j j QCD=0
+
+output VBSZZH_Inclusive_4f_LO -nojpeg

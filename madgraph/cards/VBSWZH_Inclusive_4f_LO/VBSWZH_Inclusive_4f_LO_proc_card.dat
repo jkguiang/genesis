@@ -1,0 +1,7 @@
+import model HHVBF_UFO
+
+define w = w+ w-
+
+generate p p > w z h j j QCD=0
+
+output VBSWZH_Inclusive_4f_LO -nojpeg
