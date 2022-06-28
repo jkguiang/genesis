@@ -49,14 +49,18 @@ def make_reweights(config_json, output_file=""):
             identifiers.append((coupling, index, name))
             points.append(scan_config["scan"])
 
-    for point_combo in itertools.product(*points):
+    point_combos = list(itertools.product(*points))
+    for combo_i, point_combo in enumerate(point_combos):
+        magic_comment = f"#[{combo_i+1}/{len(point_combos)}]"
         combo_name = "scan"
         set_lines = []
         for point_i, point in enumerate(point_combo):
             coupling, index, name = identifiers[point_i]
             set_lines.append(f"set {coupling} {index} {point} # {name}")
             combo_name += f"_{name}_{point}".replace("-", "m").replace(".", "p")
+            magic_comment += f" {name}:{point}"
 
+        reweight_card += f"\n{magic_comment}"
         reweight_card += f"\nlaunch --rewgt_name={combo_name}"
         reweight_card += ("\n" + "\n".join(set_lines) + "\n")
     
