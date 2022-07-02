@@ -165,6 +165,22 @@ rm RECO_${CAMPAIGN}.root
 # == NanoAODv9 ===================================
 # Prepid: SMP-RunIISummer20UL17NanoAODv9-00018
 setup_cmssw CMSSW_10_6_26 slc7_amd64_gcc700
+
+git cms-init --upstream-only
+git cms-addpkg PhysicsTools/NanoAOD
+
+cat > CMSSW_10_6_26_PhysicsTools_NanoAOD_plugins.patch << EOL
+844c844,845
+<             if (groupname == "mg_reweighting") {
+---
+>             //if (groupname == "mg_reweighting") {
+>             if (groupname.find("mg_reweighting") != std::string::npos) {
+EOL
+patch PhysicsTools/NanoAOD/plugins/GenWeightsTableProducer.cc < CMSSW_10_6_26_PhysicsTools_NanoAOD_plugins.patch
+
+scram b -j8
+cd ../..
+
 cmsDriver.py \
     --python_filename NanoAODv9_${CAMPAIGN}_cfg.py \
     --eventcontent NANOAODSIM \
