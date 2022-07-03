@@ -165,7 +165,7 @@ rm RECO_${CAMPAIGN}.root
 
 # == NanoAODv9 ===================================
 # Prepid: SMP-RunIISummer20UL16NanoAODAPVv9-00034
-setup_cmssw CMSSW_10_6_26 slc7_amd64_gcc700
+setup_cmssw CMSSW_10_6_26 slc7_amd64_gcc700 --no_scramb
 
 git cms-init --upstream-only
 git cms-addpkg PhysicsTools/NanoAOD

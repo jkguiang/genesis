@@ -9,7 +9,6 @@ from metis.StatsParser import StatsParser
 from metis.Utils import good_sites
 from metis.Sample import DummySample
 
-# formatter = lambda prog: argparse.HelpFormatter(prog, width=120, max_help_position=40)
 formatter = lambda prog: argparse.ArgumentDefaultsHelpFormatter(prog, width=120, max_help_position=40)
 
 cli = argparse.ArgumentParser(
@@ -23,6 +22,10 @@ cli.add_argument(
 cli.add_argument(
     "-t", "--tag", type=str, required=True, default=argparse.SUPPRESS,
     help="unique tag for identifying output from these jobs"
+)
+cli.add_argument(
+    "--name", type=str, default="SignalGeneration",
+    help="name for signal generation"
 )
 cli.add_argument(
     "-g", "--gridpack", type=str, required=True, default=argparse.SUPPRESS,
@@ -50,8 +53,6 @@ cli.add_argument(
 )
 args = cli.parse_args()
 
-NAME = "VBSVHSignalGeneration"
-
 if not os.path.isfile(args.gridpack):
     print("ERROR: {} does not exist!".format(args.gridpack))
     exit()
@@ -78,12 +79,13 @@ condor_submit_params = {
         ["param_nevents", args.nevents],
         ["param_campaign", args.campaign],
         ["metis_extraargs", ""],
-        ["JobBatchName", "VBS_VH_Inclusive_{}".format(args.campaign)]
+        ["JobBatchName", "{}_{}".format(args.name, args.campaign)]
     ],
     "requirements_line": "Requirements = (HAS_SINGULARITY=?=True)"
 }
 
-dataset="/VBS_VH_Inclusive/{}-106X_privateMC/NANOGEN".format(args.campaign)
+dataset_name = "_".join(args.gridpack.split("/")[-1].split("_")[:3])
+dataset="/{0}_TuneCP5/{1}-106X_privateMC/NANOGEN".format(dataset_name, args.campaign)
 
 total_summary = {}
 n_updates = args.n_monit_hrs*2 if args.n_monit_hrs > 0 else 1
@@ -97,16 +99,16 @@ for _ in range(n_updates): # update every 30 mins
         condor_submit_params=condor_submit_params,
         input_executable="scripts/condor_executable_metis.sh", # your condor executable here
         tarfile=package, # your tarfile with assorted goodies here
-        special_dir="{0}/{1}".format(NAME, args.tag), # output files into /ceph/cms/store/<user>/<special_dir>
+        special_dir="{0}/{1}".format(args.name, args.tag), # output files into /ceph/cms/store/<user>/<special_dir>
         arguments=args.gridpack
     )
     # Set task summary
     if not task.complete():
         task.process()
     total_summary[task.get_sample().get_datasetname()] = task.get_task_summary()
-    if args.debug:
+    if args.debug or args.n_monit_hrs == 0:
         break
     # Update monitoring GUI
-    StatsParser(data=total_summary, webdir="~/public_html/{}_metis".format(NAME.lower())).do()
+    StatsParser(data=total_summary, webdir="~/public_html/{}_metis".format(args.name.lower())).do()
     # Wait 30 minutes
     time.sleep(30*60)
