@@ -74,6 +74,7 @@ PROCESS=$(basename $CARDDIR)
 TASKDIR=$PWD/tasks/$PROCESS
 
 # Make package
+echo "Creating tarball for $PROCESS"
 mkdir -p workdir
 cp bin/make_gridpack workdir/make_gridpack.sh
 cp runcms*.sh workdir/
@@ -121,5 +122,7 @@ use_x509userproxy       = True
 
 queue
 EOF
+
+echo "Condor job files written to $TASKDIR"
 
 condor_submit $TASKDIR/submit.cmd
