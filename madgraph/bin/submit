@@ -73,6 +73,11 @@ fi
 PROCESS=$(basename $CARDDIR)
 TASKDIR=$PWD/tasks/$PROCESS
 
+if [[ -d $TASKDIR ]]; then
+    echo "ERROR: $TASKDIR already exists; move or delete it and run again"
+    exit 1
+fi
+
 # Make package
 echo "Creating tarball for $PROCESS"
 mkdir -p workdir
