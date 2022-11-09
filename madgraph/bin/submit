@@ -1,0 +1,118 @@
+#!/bin/bash
+
+CARDDIR=""
+TAG=""
+MEM_KB=2048
+N_CPUS=12
+SCRAM=slc7_amd64_gcc700
+CMSSW=CMSSW_10_6_0
+
+function print_help {
+cat << EOF
+usage: submit [-h] -c CARDS [-t TAG] [-m MEM_KB] [-n N_CPUS] [--cmssw CMSSW] [--scram SCRAM]
+              [T2_SITE1 T2_SITE2 ...]
+
+Submit condor jobs for producing a gridpack
+
+required arguments:
+  -c CARDS, --cards CARDS       directory containing MadGraph cards
+
+optional arguments:
+  -h, --help                    show this help message and exit
+  -t TAG, --tag TAG             unique tag for identifying the output gridpack (default: None)
+  -m MEM_KB, --mem_kb MEM_KB    amount of memory to request in kilobytes (KB) (default: $MEM_KB)
+  -n N_CPUS, --n_cpus N_CPUS    number of CPUs to request for gridpack generation (default: $N_CPUS)
+  --cmssw CMSSW                 CMSSW version to use (default: $CMSSW)
+  --scram SCRAM                 SCRAM architecture to use (default: $SCRAM)
+
+trailing arguments:
+  T2_SITE1 T2_SITE2 ...         space-separated list of sites to submit job to (default: T2_US_Purdue)
+EOF
+exit 0
+}
+
+# Read the CLI options
+TEMP=`getopt -o hc:t: --long help,cards:,tag:,mem_kb:,n_cpus:,cmssw:,scram: -- "$@"`
+eval set -- "$TEMP"
+# Extract options and their arguments
+while true; do
+    case "$1" in
+        -h|--help)
+            print_help; shift 1;;
+        -c|--cards)
+            CARDDIR=$2; shift 2;;
+        -t|--tag)
+            TAG=$2; shift 2;;
+        -m|--mem_kb)
+            MEM_KB=$2; shift 2;;
+        -n|--n_cpus)
+            N_CPUS=$2; shift 2;;
+        --cmssw)
+            CMSSW=$2; shift 2;;
+        --scram)
+            SCRAM=$2; shift 2;;
+        --) shift; break;;
+        *) echo "Internal error!"; exit 1;;
+    esac
+done
+SITES=$@
+
+if [[ "$SITES" == "" ]]; then
+    SITES="T2_US_Purdue"
+fi
+
+if [[ "$CARDDIR" == "" ]]; then
+    echo "ERROR: no card directory provided"
+    print_help
+    exit 1
+elif [[ ! -d $CARDDIR ]]; then
+    echo "ERROR: $CARDDIR does not exist"
+    exit 1
+fi
+
+PROCESS=$(basename $CARDDIR)
+TASKDIR=$PWD/tasks/$PROCESS
+
+# Make package
+mkdir -p workdir
+cp bin/make_gridpack workdir/make_gridpack.sh
+cp runcms*.sh workdir/
+cp -R metadata workdir/
+cp -R models workdir/
+cp -R patches workdir/
+cp -R utilities workdir/
+mkdir -p workdir/cards
+cp -R $CARDDIR workdir/cards/
+
+mkdir -p $TASKDIR
+tar -zcvf $TASKDIR/${PROCESS}.tar.gz workdir
+
+rm -rf workdir
+
+cp $PWD/bin/condor_executable $TASKDIR/condor_executable
+
+cat << EOF > tasks/$PROCESS/submit.cmd
+universe                = Vanilla
+Requirements            = (HAS_SINGULARITY=?=True)
+RequestMemory           = $MEM_KB
+RequestCpus             = $N_CPUS
+executable              = $TASKDIR/condor_executable
+arguments               = $USER $CMSSW $SCRAM
+transfer_executable     = True
+transfer_input_files    = $TASKDIR/${PROCESS}.tar.gz
+transfer_output_files   = ""
+log                     = $TASKDIR/condor.log
+output                  = $TASKDIR/1e.\$(Cluster).\$(Process).stdout
+error                   = $TASKDIR/1e.\$(Cluster).\$(Process).stderr
+notification            = Never
+should_transfer_files   = YES
+when_to_transfer_output = ON_EXIT
+x509userproxy           = /tmp/x509up_u$(id -u)
+use_x509userproxy       = True
++DESIRED_Sites          = "$SITES"
++JobBatchName           = "$PROCESS"
++project_Name           = "cmssurfandturf"
++tag                    = "$TAG"
+
+queue
+EOF
