@@ -85,13 +85,18 @@ mkdir -p workdir/cards
 cp -R $CARDDIR workdir/cards/
 
 mkdir -p $TASKDIR
-tar -zcvf $TASKDIR/${PROCESS}.tar.gz workdir
+tar -zcf $TASKDIR/${PROCESS}.tar.gz workdir
+
+if [[ ! -f $TASKDIR/${PROCESS}.tar.gz ]]; then
+    echo "ERROR: failed to create tarball"
+    exit 1
+fi
 
 rm -rf workdir
 
 cp $PWD/bin/condor_executable $TASKDIR/condor_executable
 
-cat << EOF > tasks/$PROCESS/submit.cmd
+cat << EOF > $TASKDIR/submit.cmd
 universe                = Vanilla
 Requirements            = (HAS_SINGULARITY=?=True)
 RequestMemory           = $MEM_KB
@@ -116,3 +121,5 @@ use_x509userproxy       = True
 
 queue
 EOF
+
+condor_submit $TASKDIR/submit.cmd
