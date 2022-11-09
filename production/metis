@@ -12,7 +12,7 @@ from metis.Sample import DummySample
 formatter = lambda prog: argparse.ArgumentDefaultsHelpFormatter(prog, width=120, max_help_position=40)
 
 cli = argparse.ArgumentParser(
-    description="Submit NanoAOD-skimming condor jobs", 
+    description="Submit condor jobs for producing NanoAOD from a gridpack", 
     formatter_class=formatter
 )
 cli.add_argument(
@@ -25,7 +25,7 @@ cli.add_argument(
 )
 cli.add_argument(
     "--name", type=str, default="SignalGeneration",
-    help="name for signal generation"
+    help="name for signal generation and name of output directory"
 )
 cli.add_argument(
     "-g", "--gridpack", type=str, required=True, default=argparse.SUPPRESS,
@@ -88,8 +88,10 @@ dataset_name = "_".join(args.gridpack.split("/")[-1].split("_")[:3])
 dataset="/{0}_TuneCP5/{1}-106X_privateMC/NANOGEN".format(dataset_name, args.campaign)
 
 total_summary = {}
-n_updates = args.n_monit_hrs*2 if args.n_monit_hrs > 0 else 1
-for _ in range(n_updates): # update every 30 mins
+n_updates = max(args.n_monit_hrs*2, 1)
+for update_i in range(n_updates): # update every 30 mins
+    if update_i > 0:
+        time.sleep(30*60) # Wait 30 minutes
     # Collect tasks
     task = CondorTask(
         sample = DummySample(dataset=dataset, N=args.njobs, nevents=args.nevents),
@@ -110,5 +112,3 @@ for _ in range(n_updates): # update every 30 mins
         break
     # Update monitoring GUI
     StatsParser(data=total_summary, webdir="~/public_html/{}_metis".format(args.name.lower())).do()
-    # Wait 30 minutes
-    time.sleep(30*60)
