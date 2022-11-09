@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ORIG_DIR=$PWD
 
 GRIDPACK=$1

@@ -588,6 +588,8 @@ make_gridpack () {
         cd ..
         rm $tarname
     fi
+
+    echo "Finished job on " `date` #Only to display the starting of production date
 }
 
 print_help () {
