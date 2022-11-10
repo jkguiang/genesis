@@ -125,14 +125,16 @@ for carddir in $(ls -d cards/*/); do
         exit 1
         break
     fi
-    # Copying the output file
-    COPY_SRC="file://${PWD}/${sample}.tar.gz"
+
     if [[ "$TAG" != "" ]]; then
-        COPY_DST="davs://redirector.t2.ucsd.edu:1095//store/user/${CEPHUSER}/gridpacks/${sample}_${TAG}.tar.gz"
+        output_tarball=${sample}_${SCRAMARCH}_${CMSSWVERSION}_${TAG}_tarball.tar.xz
     else
-        COPY_DST="davs://redirector.t2.ucsd.edu:1095//store/user/${CEPHUSER}/gridpacks/${sample}.tar.gz"
+        output_tarball=${sample}_${SCRAMARCH}_${CMSSWVERSION}_tarball.tar.xz
     fi
-    stageout $COPY_SRC $COPY_DST
+    # Copying the output file
+    copy_src="file://$PWD/${sample}_${SCRAMARCH}_${CMSSWVERSION}_tarball.tar.xz"
+    copy_dst="davs://redirector.t2.ucsd.edu:1095//store/user/$CEPHUSER/gridpacks/$output_tarball"
+    stageout $copy_src $copy_dst
 done
 
 echo -e "\n--- end running ---\n" #                             <----- section division
