@@ -72,6 +72,9 @@ fi
 
 PROCESS=$(basename $CARDDIR)
 TASKDIR=$PWD/tasks/$PROCESS
+if [[ "$TAG" != "" ]]; then
+    TASKDIR=${TASKDIR}_$TAG
+fi
 
 if [[ -d $TASKDIR ]]; then
     echo "ERROR: $TASKDIR already exists; move or delete it and run again"
