@@ -9,7 +9,7 @@ change helicity False # has also been done in the example I got from Kenneth
 change rwgt_dir rwgt
 """
 
-def make_reweights(config_json, output_file=""):
+def make_reweights(config_jsons, output_file=""):
     """
     Writes reweight_card.dat (if an output file is given) based on a configuration 
     specified in a JSON file--example below. Outputs to stdout otherwise.
@@ -34,22 +34,30 @@ def make_reweights(config_json, output_file=""):
     }
     """
 
-    with open(config_json, "r") as f_in:
-        config = json.load(f_in)
-
     reweight_card = ""
     reweight_card += HEADER[1:] # trim leading \n
 
+    point_combos = set()
     identifiers = []
-    points = []
-    for coupling, coupling_scans in config.items():
-        for scan_config in coupling_scans:
-            index = scan_config["index"]
-            name = scan_config["name"]
-            identifiers.append((coupling, index, name))
-            points.append(scan_config["scan"])
+    for config_i, config_json in enumerate(config_jsons):
+        with open(config_json, "r") as f_in:
+            config = json.load(f_in)
 
-    point_combos = list(itertools.product(*points))
+        points = []
+        for coupling_i, (coupling, coupling_scans) in enumerate(config.items()):
+            for scan_i, scan_config in enumerate(coupling_scans):
+                index = scan_config["index"]
+                name = scan_config["name"]
+                points.append(scan_config["scan"])
+                identifier = (coupling, index, name)
+                if config_i == 0:
+                    identifiers.append(identifier)
+                elif identifiers[coupling_i + scan_i] != identifier:
+                    raise Exception(f"Config {config_json} not compatible with others")
+                    return
+
+        point_combos = point_combos.union(set(itertools.product(*points)))
+
     for combo_i, point_combo in enumerate(point_combos):
         magic_comment = f"#[{combo_i+1}/{len(point_combos)}]"
         combo_name = "scan"
@@ -73,13 +81,13 @@ def make_reweights(config_json, output_file=""):
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description="Write reweight_card.dat")
     cli.add_argument(
-        "-c", "--config", type=str, required=True,
-        help="Configuration JSON"
-    )
-    cli.add_argument(
         "-o", "--output", type=str,
         help="Output .dat file"
     )
+    cli.add_argument(
+        "configs", type=str, nargs="*", 
+        help="Configuration JSON(s)"
+    )
     args = cli.parse_args()
 
-    make_reweights(args.config, output_file=args.output)
+    make_reweights(args.configs, output_file=args.output)
