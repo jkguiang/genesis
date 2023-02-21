@@ -1,6 +1,6 @@
 #!/bin/bash
-SCRIPT_DIR=$(dirname ${BASH_SOURCE[0]})
-source $SCRIPT_DIR/../utils.sh
+SCRIPT_DIR=$(dirname ${BASH_SOURCE[0]}) # parent directory
+source $SCRIPT_DIR/../utils.sh          # setup_cmssw, inject_fragment, set_lhegs_seed
 
 CAMPAIGN=RunIISummer20UL18
 FRAGMENT=$1
