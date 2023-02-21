@@ -17,10 +17,15 @@ if [[ "$SEED" = "" ]]; then
     SEED=1
 fi
 
+NCPU=$4
+if [[ "$NCPU" = "" ]]; then
+    NCPU=1
+fi
+
 echo "$GRIDPACK"
 
 TEST_DIR=${GRIDPACK%_slc*}
 TEST_DIR=$ORIG_DIR/tests/${TEST_DIR##*/}
 mkdir -p $TEST_DIR; cd $TEST_DIR
 tar -xaf $GRIDPACK
-./runcmsgrid.sh $N_EVENTS $SEED 1
+./runcmsgrid.sh $N_EVENTS $SEED $NCPU
