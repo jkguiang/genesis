@@ -84,7 +84,7 @@ condor_submit_params = {
     "requirements_line": "Requirements = (HAS_SINGULARITY=?=True)"
 }
 
-dataset_name = "_".join(args.gridpack.split("/")[-1].split("_")[:3])
+dataset_name = args.gridpack.split("/")[-1].split("_4f_LO")[0]
 dataset="/{0}_TuneCP5/{1}-106X_privateMC/NANOGEN".format(dataset_name, args.campaign)
 
 total_summary = {}
