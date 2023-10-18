@@ -14,7 +14,8 @@ from Configuration.Generator.MCTunes2017.PythiaCP5Settings_cfi import *
 from Configuration.Generator.PSweightsPythia.PythiaPSweightsSettings_cfi import *
 
 generator = cms.EDFilter(
-    "Pythia8HadronizerFilter",
+    # "Pythia8HadronizerFilter",
+    "Pythia8ConcurrentHadronizerFilter",                # for dipoleRecoil = on
     maxEventsToPrint=cms.untracked.int32(1),
     pythiaPylistVerbosity=cms.untracked.int32(1),
     filterEfficiency=cms.untracked.double(1.),
@@ -24,10 +25,17 @@ generator = cms.EDFilter(
         pythia8CommonSettingsBlock,
         pythia8CP5SettingsBlock,
         pythia8PSweightsSettingsBlock,
+        processParameters = cms.vstring(
+            "SpaceShower:dipoleRecoil = on",            # for dipoleRecoil = on
+            "25:m0 = 125.0",                            # for H-->bb decay
+            "25:onMode = off",                          # for H-->bb decay
+            "25:onIfAny = 5 -5",                        # for H-->bb decay
+        ),
         parameterSets=cms.vstring(
             "pythia8CommonSettings",
             "pythia8CP5Settings",
-            "pythia8PSweightsSettings"
+            "pythia8PSweightsSettings",
+            "processParameters",                        # for dipoleRecoil = on
         )
     )
 )

@@ -62,7 +62,7 @@ package = "{}.tar.gz".format(args.campaign)
 if os.path.isfile(package):
     os.remove(package)
 # Make new package
-tarball = Popen(["sh", "mkpkg", args.campaign], stdout=PIPE, stderr=PIPE)
+tarball = Popen(["sh", "bin/make_package", args.campaign], stdout=PIPE, stderr=PIPE)
 exit_code = tarball.wait()
 if exit_code != 0:
     print("ERROR: sh mkpkg {} failed".format(args.campaign))
