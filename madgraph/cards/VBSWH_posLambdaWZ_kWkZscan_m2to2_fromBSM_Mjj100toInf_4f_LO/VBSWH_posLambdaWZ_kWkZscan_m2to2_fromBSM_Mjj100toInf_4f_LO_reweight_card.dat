@@ -1,0 +1,1444 @@
+change mode NLO       # Define type of Reweighting. For LO sample this command
+                      # has no effect since only LO mode is allowed.
+change helicity False # has also been done in the example I got from Kenneth
+change rwgt_dir rwgt
+
+#[1/288] kW:1.0 kZ:1.4
+launch --rewgt_name=scan_kW_1p0_kZ_1p4
+set higgscoup 1 1.0 # kW
+set higgscoup 2 1.4 # kZ
+
+#[2/288] kW:1.1 kZ:1.0
+launch --rewgt_name=scan_kW_1p1_kZ_1p0
+set higgscoup 1 1.1 # kW
+set higgscoup 2 1.0 # kZ
+
+#[3/288] kW:-1.1 kZ:-1.3
+launch --rewgt_name=scan_kW_m1p1_kZ_m1p3
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[4/288] kW:1.7 kZ:1.2
+launch --rewgt_name=scan_kW_1p7_kZ_1p2
+set higgscoup 1 1.7 # kW
+set higgscoup 2 1.2 # kZ
+
+#[5/288] kW:1.7 kZ:1.7
+launch --rewgt_name=scan_kW_1p7_kZ_1p7
+set higgscoup 1 1.7 # kW
+set higgscoup 2 1.7 # kZ
+
+#[6/288] kW:1.4 kZ:0.9
+launch --rewgt_name=scan_kW_1p4_kZ_0p9
+set higgscoup 1 1.4 # kW
+set higgscoup 2 0.9 # kZ
+
+#[7/288] kW:-1.4 kZ:-1.1
+launch --rewgt_name=scan_kW_m1p4_kZ_m1p1
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[8/288] kW:-0.8 kZ:-1.3
+launch --rewgt_name=scan_kW_m0p8_kZ_m1p3
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[9/288] kW:2.0 kZ:1.2
+launch --rewgt_name=scan_kW_2p0_kZ_1p2
+set higgscoup 1 2.0 # kW
+set higgscoup 2 1.2 # kZ
+
+#[10/288] kW:2.0 kZ:1.7
+launch --rewgt_name=scan_kW_2p0_kZ_1p7
+set higgscoup 1 2.0 # kW
+set higgscoup 2 1.7 # kZ
+
+#[11/288] kW:-1.3 kZ:-0.9
+launch --rewgt_name=scan_kW_m1p3_kZ_m0p9
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[12/288] kW:0.9 kZ:0.3
+launch --rewgt_name=scan_kW_0p9_kZ_0p3
+set higgscoup 1 0.9 # kW
+set higgscoup 2 0.3 # kZ
+
+#[13/288] kW:1.7 kZ:2.0
+launch --rewgt_name=scan_kW_1p7_kZ_2p0
+set higgscoup 1 1.7 # kW
+set higgscoup 2 2.0 # kZ
+
+#[14/288] kW:-0.6 kZ:-0.7
+launch --rewgt_name=scan_kW_m0p6_kZ_m0p7
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[15/288] kW:-1.3 kZ:-1.7
+launch --rewgt_name=scan_kW_m1p3_kZ_m1p7
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[16/288] kW:-1.3 kZ:-1.2
+launch --rewgt_name=scan_kW_m1p3_kZ_m1p2
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[17/288] kW:0.9 kZ:0.8
+launch --rewgt_name=scan_kW_0p9_kZ_0p8
+set higgscoup 1 0.9 # kW
+set higgscoup 2 0.8 # kZ
+
+#[18/288] kW:0.6 kZ:2.0
+launch --rewgt_name=scan_kW_0p6_kZ_2p0
+set higgscoup 1 0.6 # kW
+set higgscoup 2 2.0 # kZ
+
+#[19/288] kW:0.3 kZ:0.3
+launch --rewgt_name=scan_kW_0p3_kZ_0p3
+set higgscoup 1 0.3 # kW
+set higgscoup 2 0.3 # kZ
+
+#[20/288] kW:2.0 kZ:2.0
+launch --rewgt_name=scan_kW_2p0_kZ_2p0
+set higgscoup 1 2.0 # kW
+set higgscoup 2 2.0 # kZ
+
+#[21/288] kW:0.3 kZ:0.8
+launch --rewgt_name=scan_kW_0p3_kZ_0p8
+set higgscoup 1 0.3 # kW
+set higgscoup 2 0.8 # kZ
+
+#[22/288] kW:-0.3 kZ:-0.8
+launch --rewgt_name=scan_kW_m0p3_kZ_m0p8
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[23/288] kW:-1.7 kZ:-0.7
+launch --rewgt_name=scan_kW_m1p7_kZ_m0p7
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[24/288] kW:-0.3 kZ:-0.3
+launch --rewgt_name=scan_kW_m0p3_kZ_m0p3
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[25/288] kW:-2.0 kZ:-2.0
+launch --rewgt_name=scan_kW_m2p0_kZ_m2p0
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[26/288] kW:-2.0 kZ:-1.0
+launch --rewgt_name=scan_kW_m2p0_kZ_m1p0
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[27/288] kW:-1.2 kZ:-0.9
+launch --rewgt_name=scan_kW_m1p2_kZ_m0p9
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[28/288] kW:-1.0 kZ:-2.0
+launch --rewgt_name=scan_kW_m1p0_kZ_m2p0
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[29/288] kW:-1.2 kZ:-1.7
+launch --rewgt_name=scan_kW_m1p2_kZ_m1p7
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[30/288] kW:-1.2 kZ:-1.2
+launch --rewgt_name=scan_kW_m1p2_kZ_m1p2
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[31/288] kW:1.3 kZ:1.2
+launch --rewgt_name=scan_kW_1p3_kZ_1p2
+set higgscoup 1 1.3 # kW
+set higgscoup 2 1.2 # kZ
+
+#[32/288] kW:1.3 kZ:1.7
+launch --rewgt_name=scan_kW_1p3_kZ_1p7
+set higgscoup 1 1.3 # kW
+set higgscoup 2 1.7 # kZ
+
+#[33/288] kW:1.3 kZ:0.9
+launch --rewgt_name=scan_kW_1p3_kZ_0p9
+set higgscoup 1 1.3 # kW
+set higgscoup 2 0.9 # kZ
+
+#[34/288] kW:-1.0 kZ:-1.0
+launch --rewgt_name=scan_kW_m1p0_kZ_m1p0
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[35/288] kW:-0.9 kZ:-0.8
+launch --rewgt_name=scan_kW_m0p9_kZ_m0p8
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[36/288] kW:-0.9 kZ:-0.3
+launch --rewgt_name=scan_kW_m0p9_kZ_m0p3
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[37/288] kW:-2.0 kZ:-1.2
+launch --rewgt_name=scan_kW_m2p0_kZ_m1p2
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[38/288] kW:0.8 kZ:1.3
+launch --rewgt_name=scan_kW_0p8_kZ_1p3
+set higgscoup 1 0.8 # kW
+set higgscoup 2 1.3 # kZ
+
+#[39/288] kW:-2.0 kZ:-1.7
+launch --rewgt_name=scan_kW_m2p0_kZ_m1p7
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[40/288] kW:-1.0 kZ:-1.7
+launch --rewgt_name=scan_kW_m1p0_kZ_m1p7
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[41/288] kW:1.4 kZ:1.1
+launch --rewgt_name=scan_kW_1p4_kZ_1p1
+set higgscoup 1 1.4 # kW
+set higgscoup 2 1.1 # kZ
+
+#[42/288] kW:-1.0 kZ:-1.2
+launch --rewgt_name=scan_kW_m1p0_kZ_m1p2
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[43/288] kW:0.9 kZ:1.0
+launch --rewgt_name=scan_kW_0p9_kZ_1p0
+set higgscoup 1 0.9 # kW
+set higgscoup 2 1.0 # kZ
+
+#[44/288] kW:-1.4 kZ:-0.9
+launch --rewgt_name=scan_kW_m1p4_kZ_m0p9
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[45/288] kW:1.2 kZ:0.3
+launch --rewgt_name=scan_kW_1p2_kZ_0p3
+set higgscoup 1 1.2 # kW
+set higgscoup 2 0.3 # kZ
+
+#[46/288] kW:0.7 kZ:0.9
+launch --rewgt_name=scan_kW_0p7_kZ_0p9
+set higgscoup 1 0.7 # kW
+set higgscoup 2 0.9 # kZ
+
+#[47/288] kW:0.3 kZ:1.0
+launch --rewgt_name=scan_kW_0p3_kZ_1p0
+set higgscoup 1 0.3 # kW
+set higgscoup 2 1.0 # kZ
+
+#[48/288] kW:1.2 kZ:0.8
+launch --rewgt_name=scan_kW_1p2_kZ_0p8
+set higgscoup 1 1.2 # kW
+set higgscoup 2 0.8 # kZ
+
+#[49/288] kW:-2.0 kZ:-1.3
+launch --rewgt_name=scan_kW_m2p0_kZ_m1p3
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[50/288] kW:-1.0 kZ:-1.3
+launch --rewgt_name=scan_kW_m1p0_kZ_m1p3
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[51/288] kW:-0.6 kZ:-1.3
+launch --rewgt_name=scan_kW_m0p6_kZ_m1p3
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[52/288] kW:1.7 kZ:0.6
+launch --rewgt_name=scan_kW_1p7_kZ_0p6
+set higgscoup 1 1.7 # kW
+set higgscoup 2 0.6 # kZ
+
+#[53/288] kW:1.0 kZ:0.3
+launch --rewgt_name=scan_kW_1p0_kZ_0p3
+set higgscoup 1 1.0 # kW
+set higgscoup 2 0.3 # kZ
+
+#[54/288] kW:0.6 kZ:1.4
+launch --rewgt_name=scan_kW_0p6_kZ_1p4
+set higgscoup 1 0.6 # kW
+set higgscoup 2 1.4 # kZ
+
+#[55/288] kW:0.6 kZ:0.6
+launch --rewgt_name=scan_kW_0p6_kZ_0p6
+set higgscoup 1 0.6 # kW
+set higgscoup 2 0.6 # kZ
+
+#[56/288] kW:1.0 kZ:0.8
+launch --rewgt_name=scan_kW_1p0_kZ_0p8
+set higgscoup 1 1.0 # kW
+set higgscoup 2 0.8 # kZ
+
+#[57/288] kW:2.0 kZ:0.6
+launch --rewgt_name=scan_kW_2p0_kZ_0p6
+set higgscoup 1 2.0 # kW
+set higgscoup 2 0.6 # kZ
+
+#[58/288] kW:0.8 kZ:2.0
+launch --rewgt_name=scan_kW_0p8_kZ_2p0
+set higgscoup 1 0.8 # kW
+set higgscoup 2 2.0 # kZ
+
+#[59/288] kW:-0.7 kZ:-1.1
+launch --rewgt_name=scan_kW_m0p7_kZ_m1p1
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[60/288] kW:1.0 kZ:1.1
+launch --rewgt_name=scan_kW_1p0_kZ_1p1
+set higgscoup 1 1.0 # kW
+set higgscoup 2 1.1 # kZ
+
+#[61/288] kW:1.1 kZ:0.3
+launch --rewgt_name=scan_kW_1p1_kZ_0p3
+set higgscoup 1 1.1 # kW
+set higgscoup 2 0.3 # kZ
+
+#[62/288] kW:-0.7 kZ:-0.8
+launch --rewgt_name=scan_kW_m0p7_kZ_m0p8
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[63/288] kW:1.2 kZ:1.0
+launch --rewgt_name=scan_kW_1p2_kZ_1p0
+set higgscoup 1 1.2 # kW
+set higgscoup 2 1.0 # kZ
+
+#[64/288] kW:1.1 kZ:0.8
+launch --rewgt_name=scan_kW_1p1_kZ_0p8
+set higgscoup 1 1.1 # kW
+set higgscoup 2 0.8 # kZ
+
+#[65/288] kW:-0.7 kZ:-0.3
+launch --rewgt_name=scan_kW_m0p7_kZ_m0p3
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[66/288] kW:-1.3 kZ:-1.1
+launch --rewgt_name=scan_kW_m1p3_kZ_m1p1
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[67/288] kW:0.7 kZ:1.1
+launch --rewgt_name=scan_kW_0p7_kZ_1p1
+set higgscoup 1 0.7 # kW
+set higgscoup 2 1.1 # kZ
+
+#[68/288] kW:-0.3 kZ:-1.4
+launch --rewgt_name=scan_kW_m0p3_kZ_m1p4
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[69/288] kW:-1.1 kZ:-0.9
+launch --rewgt_name=scan_kW_m1p1_kZ_m0p9
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[70/288] kW:1.1 kZ:1.1
+launch --rewgt_name=scan_kW_1p1_kZ_1p1
+set higgscoup 1 1.1 # kW
+set higgscoup 2 1.1 # kZ
+
+#[71/288] kW:-1.3 kZ:-0.8
+launch --rewgt_name=scan_kW_m1p3_kZ_m0p8
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[72/288] kW:-1.1 kZ:-1.7
+launch --rewgt_name=scan_kW_m1p1_kZ_m1p7
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[73/288] kW:-1.1 kZ:-1.2
+launch --rewgt_name=scan_kW_m1p1_kZ_m1p2
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[74/288] kW:1.7 kZ:1.3
+launch --rewgt_name=scan_kW_1p7_kZ_1p3
+set higgscoup 1 1.7 # kW
+set higgscoup 2 1.3 # kZ
+
+#[75/288] kW:-0.9 kZ:-1.4
+launch --rewgt_name=scan_kW_m0p9_kZ_m1p4
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[76/288] kW:-0.6 kZ:-0.6
+launch --rewgt_name=scan_kW_m0p6_kZ_m0p6
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[77/288] kW:-0.8 kZ:-0.9
+launch --rewgt_name=scan_kW_m0p8_kZ_m0p9
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[78/288] kW:0.9 kZ:0.9
+launch --rewgt_name=scan_kW_0p9_kZ_0p9
+set higgscoup 1 0.9 # kW
+set higgscoup 2 0.9 # kZ
+
+#[79/288] kW:-1.3 kZ:-0.3
+launch --rewgt_name=scan_kW_m1p3_kZ_m0p3
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[80/288] kW:-0.8 kZ:-1.7
+launch --rewgt_name=scan_kW_m0p8_kZ_m1p7
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[81/288] kW:2.0 kZ:1.3
+launch --rewgt_name=scan_kW_2p0_kZ_1p3
+set higgscoup 1 2.0 # kW
+set higgscoup 2 1.3 # kZ
+
+#[82/288] kW:-0.8 kZ:-1.2
+launch --rewgt_name=scan_kW_m0p8_kZ_m1p2
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[83/288] kW:-1.2 kZ:-1.1
+launch --rewgt_name=scan_kW_m1p2_kZ_m1p1
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[84/288] kW:0.3 kZ:0.9
+launch --rewgt_name=scan_kW_0p3_kZ_0p9
+set higgscoup 1 0.3 # kW
+set higgscoup 2 0.9 # kZ
+
+#[85/288] kW:-1.7 kZ:-0.6
+launch --rewgt_name=scan_kW_m1p7_kZ_m0p6
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[86/288] kW:-1.7 kZ:-1.4
+launch --rewgt_name=scan_kW_m1p7_kZ_m1p4
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[87/288] kW:0.8 kZ:1.4
+launch --rewgt_name=scan_kW_0p8_kZ_1p4
+set higgscoup 1 0.8 # kW
+set higgscoup 2 1.4 # kZ
+
+#[88/288] kW:-1.2 kZ:-0.8
+launch --rewgt_name=scan_kW_m1p2_kZ_m0p8
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[89/288] kW:0.8 kZ:0.6
+launch --rewgt_name=scan_kW_0p8_kZ_0p6
+set higgscoup 1 0.8 # kW
+set higgscoup 2 0.6 # kZ
+
+#[90/288] kW:1.4 kZ:1.2
+launch --rewgt_name=scan_kW_1p4_kZ_1p2
+set higgscoup 1 1.4 # kW
+set higgscoup 2 1.2 # kZ
+
+#[91/288] kW:1.4 kZ:1.7
+launch --rewgt_name=scan_kW_1p4_kZ_1p7
+set higgscoup 1 1.4 # kW
+set higgscoup 2 1.7 # kZ
+
+#[92/288] kW:-0.3 kZ:-0.7
+launch --rewgt_name=scan_kW_m0p3_kZ_m0p7
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[93/288] kW:-1.2 kZ:-0.3
+launch --rewgt_name=scan_kW_m1p2_kZ_m0p3
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[94/288] kW:-0.9 kZ:-0.7
+launch --rewgt_name=scan_kW_m0p9_kZ_m0p7
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[95/288] kW:0.6 kZ:0.3
+launch --rewgt_name=scan_kW_0p6_kZ_0p3
+set higgscoup 1 0.6 # kW
+set higgscoup 2 0.3 # kZ
+
+#[96/288] kW:1.4 kZ:2.0
+launch --rewgt_name=scan_kW_1p4_kZ_2p0
+set higgscoup 1 1.4 # kW
+set higgscoup 2 2.0 # kZ
+
+#[97/288] kW:-1.4 kZ:-0.8
+launch --rewgt_name=scan_kW_m1p4_kZ_m0p8
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[98/288] kW:1.3 kZ:1.3
+launch --rewgt_name=scan_kW_1p3_kZ_1p3
+set higgscoup 1 1.3 # kW
+set higgscoup 2 1.3 # kZ
+
+#[99/288] kW:0.6 kZ:0.8
+launch --rewgt_name=scan_kW_0p6_kZ_0p8
+set higgscoup 1 0.6 # kW
+set higgscoup 2 0.8 # kZ
+
+#[100/288] kW:-1.4 kZ:-0.3
+launch --rewgt_name=scan_kW_m1p4_kZ_m0p3
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[101/288] kW:0.9 kZ:1.1
+launch --rewgt_name=scan_kW_0p9_kZ_1p1
+set higgscoup 1 0.9 # kW
+set higgscoup 2 1.1 # kZ
+
+#[102/288] kW:1.2 kZ:0.9
+launch --rewgt_name=scan_kW_1p2_kZ_0p9
+set higgscoup 1 1.2 # kW
+set higgscoup 2 0.9 # kZ
+
+#[103/288] kW:-0.6 kZ:-2.0
+launch --rewgt_name=scan_kW_m0p6_kZ_m2p0
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[104/288] kW:1.7 kZ:0.7
+launch --rewgt_name=scan_kW_1p7_kZ_0p7
+set higgscoup 1 1.7 # kW
+set higgscoup 2 0.7 # kZ
+
+#[105/288] kW:-0.6 kZ:-1.0
+launch --rewgt_name=scan_kW_m0p6_kZ_m1p0
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[106/288] kW:0.3 kZ:1.1
+launch --rewgt_name=scan_kW_0p3_kZ_1p1
+set higgscoup 1 0.3 # kW
+set higgscoup 2 1.1 # kZ
+
+#[107/288] kW:-0.7 kZ:-1.4
+launch --rewgt_name=scan_kW_m0p7_kZ_m1p4
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[108/288] kW:0.6 kZ:0.7
+launch --rewgt_name=scan_kW_0p6_kZ_0p7
+set higgscoup 1 0.6 # kW
+set higgscoup 2 0.7 # kZ
+
+#[109/288] kW:1.0 kZ:0.9
+launch --rewgt_name=scan_kW_1p0_kZ_0p9
+set higgscoup 1 1.0 # kW
+set higgscoup 2 0.9 # kZ
+
+#[110/288] kW:2.0 kZ:0.7
+launch --rewgt_name=scan_kW_2p0_kZ_0p7
+set higgscoup 1 2.0 # kW
+set higgscoup 2 0.7 # kZ
+
+#[111/288] kW:-2.0 kZ:-0.9
+launch --rewgt_name=scan_kW_m2p0_kZ_m0p9
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[112/288] kW:-1.0 kZ:-0.9
+launch --rewgt_name=scan_kW_m1p0_kZ_m0p9
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[113/288] kW:-0.6 kZ:-1.7
+launch --rewgt_name=scan_kW_m0p6_kZ_m1p7
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[114/288] kW:-0.6 kZ:-1.2
+launch --rewgt_name=scan_kW_m0p6_kZ_m1p2
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[115/288] kW:1.3 kZ:2.0
+launch --rewgt_name=scan_kW_1p3_kZ_2p0
+set higgscoup 1 1.3 # kW
+set higgscoup 2 2.0 # kZ
+
+#[116/288] kW:0.6 kZ:1.0
+launch --rewgt_name=scan_kW_0p6_kZ_1p0
+set higgscoup 1 0.6 # kW
+set higgscoup 2 1.0 # kZ
+
+#[117/288] kW:-1.7 kZ:-1.0
+launch --rewgt_name=scan_kW_m1p7_kZ_m1p0
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[118/288] kW:-1.7 kZ:-2.0
+launch --rewgt_name=scan_kW_m1p7_kZ_m2p0
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[119/288] kW:0.7 kZ:1.2
+launch --rewgt_name=scan_kW_0p7_kZ_1p2
+set higgscoup 1 0.7 # kW
+set higgscoup 2 1.2 # kZ
+
+#[120/288] kW:0.7 kZ:1.7
+launch --rewgt_name=scan_kW_0p7_kZ_1p7
+set higgscoup 1 0.7 # kW
+set higgscoup 2 1.7 # kZ
+
+#[121/288] kW:-0.3 kZ:-1.3
+launch --rewgt_name=scan_kW_m0p3_kZ_m1p3
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[122/288] kW:1.1 kZ:1.2
+launch --rewgt_name=scan_kW_1p1_kZ_1p2
+set higgscoup 1 1.1 # kW
+set higgscoup 2 1.2 # kZ
+
+#[123/288] kW:1.1 kZ:1.7
+launch --rewgt_name=scan_kW_1p1_kZ_1p7
+set higgscoup 1 1.1 # kW
+set higgscoup 2 1.7 # kZ
+
+#[124/288] kW:1.1 kZ:0.9
+launch --rewgt_name=scan_kW_1p1_kZ_0p9
+set higgscoup 1 1.1 # kW
+set higgscoup 2 0.9 # kZ
+
+#[125/288] kW:0.7 kZ:2.0
+launch --rewgt_name=scan_kW_0p7_kZ_2p0
+set higgscoup 1 0.7 # kW
+set higgscoup 2 2.0 # kZ
+
+#[126/288] kW:1.7 kZ:1.4
+launch --rewgt_name=scan_kW_1p7_kZ_1p4
+set higgscoup 1 1.7 # kW
+set higgscoup 2 1.4 # kZ
+
+#[127/288] kW:-1.1 kZ:-1.1
+launch --rewgt_name=scan_kW_m1p1_kZ_m1p1
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[128/288] kW:1.4 kZ:0.6
+launch --rewgt_name=scan_kW_1p4_kZ_0p6
+set higgscoup 1 1.4 # kW
+set higgscoup 2 0.6 # kZ
+
+#[129/288] kW:-0.9 kZ:-1.3
+launch --rewgt_name=scan_kW_m0p9_kZ_m1p3
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[130/288] kW:-0.8 kZ:-1.1
+launch --rewgt_name=scan_kW_m0p8_kZ_m1p1
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[131/288] kW:-0.7 kZ:-0.7
+launch --rewgt_name=scan_kW_m0p7_kZ_m0p7
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[132/288] kW:1.2 kZ:1.1
+launch --rewgt_name=scan_kW_1p2_kZ_1p1
+set higgscoup 1 1.2 # kW
+set higgscoup 2 1.1 # kZ
+
+#[133/288] kW:2.0 kZ:1.4
+launch --rewgt_name=scan_kW_2p0_kZ_1p4
+set higgscoup 1 2.0 # kW
+set higgscoup 2 1.4 # kZ
+
+#[134/288] kW:-1.1 kZ:-0.8
+launch --rewgt_name=scan_kW_m1p1_kZ_m0p8
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[135/288] kW:-1.1 kZ:-0.3
+launch --rewgt_name=scan_kW_m1p1_kZ_m0p3
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[136/288] kW:-0.8 kZ:-0.8
+launch --rewgt_name=scan_kW_m0p8_kZ_m0p8
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[137/288] kW:-1.7 kZ:-1.3
+launch --rewgt_name=scan_kW_m1p7_kZ_m1p3
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[138/288] kW:-0.8 kZ:-0.3
+launch --rewgt_name=scan_kW_m0p8_kZ_m0p3
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[139/288] kW:-1.3 kZ:-0.7
+launch --rewgt_name=scan_kW_m1p3_kZ_m0p7
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[140/288] kW:-1.4 kZ:-1.4
+launch --rewgt_name=scan_kW_m1p4_kZ_m1p4
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[141/288] kW:0.8 kZ:0.7
+launch --rewgt_name=scan_kW_0p8_kZ_0p7
+set higgscoup 1 0.8 # kW
+set higgscoup 2 0.7 # kZ
+
+#[142/288] kW:-0.3 kZ:-0.6
+launch --rewgt_name=scan_kW_m0p3_kZ_m0p6
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[143/288] kW:1.3 kZ:1.4
+launch --rewgt_name=scan_kW_1p3_kZ_1p4
+set higgscoup 1 1.3 # kW
+set higgscoup 2 1.4 # kZ
+
+#[144/288] kW:1.3 kZ:0.6
+launch --rewgt_name=scan_kW_1p3_kZ_0p6
+set higgscoup 1 1.3 # kW
+set higgscoup 2 0.6 # kZ
+
+#[145/288] kW:0.8 kZ:1.0
+launch --rewgt_name=scan_kW_0p8_kZ_1p0
+set higgscoup 1 0.8 # kW
+set higgscoup 2 1.0 # kZ
+
+#[146/288] kW:-0.9 kZ:-0.6
+launch --rewgt_name=scan_kW_m0p9_kZ_m0p6
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[147/288] kW:-1.2 kZ:-0.7
+launch --rewgt_name=scan_kW_m1p2_kZ_m0p7
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[148/288] kW:1.4 kZ:1.3
+launch --rewgt_name=scan_kW_1p4_kZ_1p3
+set higgscoup 1 1.4 # kW
+set higgscoup 2 1.3 # kZ
+
+#[149/288] kW:0.9 kZ:1.7
+launch --rewgt_name=scan_kW_0p9_kZ_1p7
+set higgscoup 1 0.9 # kW
+set higgscoup 2 1.7 # kZ
+
+#[150/288] kW:0.9 kZ:1.2
+launch --rewgt_name=scan_kW_0p9_kZ_1p2
+set higgscoup 1 0.9 # kW
+set higgscoup 2 1.2 # kZ
+
+#[151/288] kW:0.6 kZ:0.9
+launch --rewgt_name=scan_kW_0p6_kZ_0p9
+set higgscoup 1 0.6 # kW
+set higgscoup 2 0.9 # kZ
+
+#[152/288] kW:0.7 kZ:0.6
+launch --rewgt_name=scan_kW_0p7_kZ_0p6
+set higgscoup 1 0.7 # kW
+set higgscoup 2 0.6 # kZ
+
+#[153/288] kW:0.3 kZ:1.2
+launch --rewgt_name=scan_kW_0p3_kZ_1p2
+set higgscoup 1 0.3 # kW
+set higgscoup 2 1.2 # kZ
+
+#[154/288] kW:0.3 kZ:1.7
+launch --rewgt_name=scan_kW_0p3_kZ_1p7
+set higgscoup 1 0.3 # kW
+set higgscoup 2 1.7 # kZ
+
+#[155/288] kW:0.9 kZ:2.0
+launch --rewgt_name=scan_kW_0p9_kZ_2p0
+set higgscoup 1 0.9 # kW
+set higgscoup 2 2.0 # kZ
+
+#[156/288] kW:-1.4 kZ:-0.7
+launch --rewgt_name=scan_kW_m1p4_kZ_m0p7
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[157/288] kW:-0.7 kZ:-1.3
+launch --rewgt_name=scan_kW_m0p7_kZ_m1p3
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[158/288] kW:-2.0 kZ:-1.1
+launch --rewgt_name=scan_kW_m2p0_kZ_m1p1
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[159/288] kW:-1.0 kZ:-1.1
+launch --rewgt_name=scan_kW_m1p0_kZ_m1p1
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[160/288] kW:-0.6 kZ:-1.1
+launch --rewgt_name=scan_kW_m0p6_kZ_m1p1
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[161/288] kW:0.3 kZ:2.0
+launch --rewgt_name=scan_kW_0p3_kZ_2p0
+set higgscoup 1 0.3 # kW
+set higgscoup 2 2.0 # kZ
+
+#[162/288] kW:1.7 kZ:0.3
+launch --rewgt_name=scan_kW_1p7_kZ_0p3
+set higgscoup 1 1.7 # kW
+set higgscoup 2 0.3 # kZ
+
+#[163/288] kW:-2.0 kZ:-0.8
+launch --rewgt_name=scan_kW_m2p0_kZ_m0p8
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[164/288] kW:-1.0 kZ:-0.8
+launch --rewgt_name=scan_kW_m1p0_kZ_m0p8
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[165/288] kW:1.7 kZ:0.8
+launch --rewgt_name=scan_kW_1p7_kZ_0p8
+set higgscoup 1 1.7 # kW
+set higgscoup 2 0.8 # kZ
+
+#[166/288] kW:2.0 kZ:0.3
+launch --rewgt_name=scan_kW_2p0_kZ_0p3
+set higgscoup 1 2.0 # kW
+set higgscoup 2 0.3 # kZ
+
+#[167/288] kW:-2.0 kZ:-0.3
+launch --rewgt_name=scan_kW_m2p0_kZ_m0p3
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[168/288] kW:-1.0 kZ:-0.3
+launch --rewgt_name=scan_kW_m1p0_kZ_m0p3
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[169/288] kW:1.0 kZ:1.3
+launch --rewgt_name=scan_kW_1p0_kZ_1p3
+set higgscoup 1 1.0 # kW
+set higgscoup 2 1.3 # kZ
+
+#[170/288] kW:2.0 kZ:0.8
+launch --rewgt_name=scan_kW_2p0_kZ_0p8
+set higgscoup 1 2.0 # kW
+set higgscoup 2 0.8 # kZ
+
+#[171/288] kW:-0.3 kZ:-2.0
+launch --rewgt_name=scan_kW_m0p3_kZ_m2p0
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[172/288] kW:1.2 kZ:1.2
+launch --rewgt_name=scan_kW_1p2_kZ_1p2
+set higgscoup 1 1.2 # kW
+set higgscoup 2 1.2 # kZ
+
+#[173/288] kW:1.2 kZ:1.7
+launch --rewgt_name=scan_kW_1p2_kZ_1p7
+set higgscoup 1 1.2 # kW
+set higgscoup 2 1.7 # kZ
+
+#[174/288] kW:0.6 kZ:1.1
+launch --rewgt_name=scan_kW_0p6_kZ_1p1
+set higgscoup 1 0.6 # kW
+set higgscoup 2 1.1 # kZ
+
+#[175/288] kW:-0.3 kZ:-1.0
+launch --rewgt_name=scan_kW_m0p3_kZ_m1p0
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[176/288] kW:0.7 kZ:1.3
+launch --rewgt_name=scan_kW_0p7_kZ_1p3
+set higgscoup 1 0.7 # kW
+set higgscoup 2 1.3 # kZ
+
+#[177/288] kW:1.4 kZ:0.7
+launch --rewgt_name=scan_kW_1p4_kZ_0p7
+set higgscoup 1 1.4 # kW
+set higgscoup 2 0.7 # kZ
+
+#[178/288] kW:-0.9 kZ:-2.0
+launch --rewgt_name=scan_kW_m0p9_kZ_m2p0
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[179/288] kW:1.2 kZ:2.0
+launch --rewgt_name=scan_kW_1p2_kZ_2p0
+set higgscoup 1 1.2 # kW
+set higgscoup 2 2.0 # kZ
+
+#[180/288] kW:-0.9 kZ:-1.0
+launch --rewgt_name=scan_kW_m0p9_kZ_m1p0
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[181/288] kW:-0.3 kZ:-1.7
+launch --rewgt_name=scan_kW_m0p3_kZ_m1p7
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[182/288] kW:1.0 kZ:1.2
+launch --rewgt_name=scan_kW_1p0_kZ_1p2
+set higgscoup 1 1.0 # kW
+set higgscoup 2 1.2 # kZ
+
+#[183/288] kW:1.0 kZ:1.7
+launch --rewgt_name=scan_kW_1p0_kZ_1p7
+set higgscoup 1 1.0 # kW
+set higgscoup 2 1.7 # kZ
+
+#[184/288] kW:1.1 kZ:1.3
+launch --rewgt_name=scan_kW_1p1_kZ_1p3
+set higgscoup 1 1.1 # kW
+set higgscoup 2 1.3 # kZ
+
+#[185/288] kW:-0.7 kZ:-0.6
+launch --rewgt_name=scan_kW_m0p7_kZ_m0p6
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[186/288] kW:-0.3 kZ:-1.2
+launch --rewgt_name=scan_kW_m0p3_kZ_m1p2
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[187/288] kW:1.7 kZ:1.0
+launch --rewgt_name=scan_kW_1p7_kZ_1p0
+set higgscoup 1 1.7 # kW
+set higgscoup 2 1.0 # kZ
+
+#[188/288] kW:-0.6 kZ:-0.9
+launch --rewgt_name=scan_kW_m0p6_kZ_m0p9
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[189/288] kW:-0.9 kZ:-1.7
+launch --rewgt_name=scan_kW_m0p9_kZ_m1p7
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[190/288] kW:-0.9 kZ:-1.2
+launch --rewgt_name=scan_kW_m0p9_kZ_m1p2
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[191/288] kW:0.9 kZ:0.6
+launch --rewgt_name=scan_kW_0p9_kZ_0p6
+set higgscoup 1 0.9 # kW
+set higgscoup 2 0.6 # kZ
+
+#[192/288] kW:1.0 kZ:2.0
+launch --rewgt_name=scan_kW_1p0_kZ_2p0
+set higgscoup 1 1.0 # kW
+set higgscoup 2 2.0 # kZ
+
+#[193/288] kW:-1.4 kZ:-1.3
+launch --rewgt_name=scan_kW_m1p4_kZ_m1p3
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[194/288] kW:2.0 kZ:1.0
+launch --rewgt_name=scan_kW_2p0_kZ_1p0
+set higgscoup 1 2.0 # kW
+set higgscoup 2 1.0 # kZ
+
+#[195/288] kW:-1.1 kZ:-0.7
+launch --rewgt_name=scan_kW_m1p1_kZ_m0p7
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[196/288] kW:-1.3 kZ:-0.6
+launch --rewgt_name=scan_kW_m1p3_kZ_m0p6
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[197/288] kW:-1.3 kZ:-1.4
+launch --rewgt_name=scan_kW_m1p3_kZ_m1p4
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[198/288] kW:0.3 kZ:0.6
+launch --rewgt_name=scan_kW_0p3_kZ_0p6
+set higgscoup 1 0.3 # kW
+set higgscoup 2 0.6 # kZ
+
+#[199/288] kW:-0.8 kZ:-0.7
+launch --rewgt_name=scan_kW_m0p8_kZ_m0p7
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[200/288] kW:-1.7 kZ:-0.9
+launch --rewgt_name=scan_kW_m1p7_kZ_m0p9
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[201/288] kW:-1.7 kZ:-1.7
+launch --rewgt_name=scan_kW_m1p7_kZ_m1p7
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[202/288] kW:-1.7 kZ:-1.2
+launch --rewgt_name=scan_kW_m1p7_kZ_m1p2
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[203/288] kW:1.4 kZ:1.4
+launch --rewgt_name=scan_kW_1p4_kZ_1p4
+set higgscoup 1 1.4 # kW
+set higgscoup 2 1.4 # kZ
+
+#[204/288] kW:1.3 kZ:0.7
+launch --rewgt_name=scan_kW_1p3_kZ_0p7
+set higgscoup 1 1.3 # kW
+set higgscoup 2 0.7 # kZ
+
+#[205/288] kW:0.8 kZ:0.3
+launch --rewgt_name=scan_kW_0p8_kZ_0p3
+set higgscoup 1 0.8 # kW
+set higgscoup 2 0.3 # kZ
+
+#[206/288] kW:1.1 kZ:2.0
+launch --rewgt_name=scan_kW_1p1_kZ_2p0
+set higgscoup 1 1.1 # kW
+set higgscoup 2 2.0 # kZ
+
+#[207/288] kW:-1.2 kZ:-0.6
+launch --rewgt_name=scan_kW_m1p2_kZ_m0p6
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[208/288] kW:0.8 kZ:0.8
+launch --rewgt_name=scan_kW_0p8_kZ_0p8
+set higgscoup 1 0.8 # kW
+set higgscoup 2 0.8 # kZ
+
+#[209/288] kW:-1.2 kZ:-1.4
+launch --rewgt_name=scan_kW_m1p2_kZ_m1p4
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[210/288] kW:1.3 kZ:1.0
+launch --rewgt_name=scan_kW_1p3_kZ_1p0
+set higgscoup 1 1.3 # kW
+set higgscoup 2 1.0 # kZ
+
+#[211/288] kW:-2.0 kZ:-1.4
+launch --rewgt_name=scan_kW_m2p0_kZ_m1p4
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[212/288] kW:-1.0 kZ:-1.4
+launch --rewgt_name=scan_kW_m1p0_kZ_m1p4
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[213/288] kW:0.7 kZ:0.7
+launch --rewgt_name=scan_kW_0p7_kZ_0p7
+set higgscoup 1 0.7 # kW
+set higgscoup 2 0.7 # kZ
+
+#[214/288] kW:0.8 kZ:1.1
+launch --rewgt_name=scan_kW_0p8_kZ_1p1
+set higgscoup 1 0.8 # kW
+set higgscoup 2 1.1 # kZ
+
+#[215/288] kW:-1.4 kZ:-0.6
+launch --rewgt_name=scan_kW_m1p4_kZ_m0p6
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[216/288] kW:0.9 kZ:1.3
+launch --rewgt_name=scan_kW_0p9_kZ_1p3
+set higgscoup 1 0.9 # kW
+set higgscoup 2 1.3 # kZ
+
+#[217/288] kW:1.2 kZ:0.6
+launch --rewgt_name=scan_kW_1p2_kZ_0p6
+set higgscoup 1 1.2 # kW
+set higgscoup 2 0.6 # kZ
+
+#[218/288] kW:-0.7 kZ:-2.0
+launch --rewgt_name=scan_kW_m0p7_kZ_m2p0
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[219/288] kW:-0.7 kZ:-1.0
+launch --rewgt_name=scan_kW_m0p7_kZ_m1p0
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[220/288] kW:0.3 kZ:1.3
+launch --rewgt_name=scan_kW_0p3_kZ_1p3
+set higgscoup 1 0.3 # kW
+set higgscoup 2 1.3 # kZ
+
+#[221/288] kW:-0.7 kZ:-1.7
+launch --rewgt_name=scan_kW_m0p7_kZ_m1p7
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[222/288] kW:-0.7 kZ:-1.2
+launch --rewgt_name=scan_kW_m0p7_kZ_m1p2
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[223/288] kW:1.0 kZ:0.6
+launch --rewgt_name=scan_kW_1p0_kZ_0p6
+set higgscoup 1 1.0 # kW
+set higgscoup 2 0.6 # kZ
+
+#[224/288] kW:-1.3 kZ:-2.0
+launch --rewgt_name=scan_kW_m1p3_kZ_m2p0
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[225/288] kW:1.7 kZ:0.9
+launch --rewgt_name=scan_kW_1p7_kZ_0p9
+set higgscoup 1 1.7 # kW
+set higgscoup 2 0.9 # kZ
+
+#[226/288] kW:-1.3 kZ:-1.0
+launch --rewgt_name=scan_kW_m1p3_kZ_m1p0
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[227/288] kW:0.6 kZ:1.2
+launch --rewgt_name=scan_kW_0p6_kZ_1p2
+set higgscoup 1 0.6 # kW
+set higgscoup 2 1.2 # kZ
+
+#[228/288] kW:0.6 kZ:1.7
+launch --rewgt_name=scan_kW_0p6_kZ_1p7
+set higgscoup 1 0.6 # kW
+set higgscoup 2 1.7 # kZ
+
+#[229/288] kW:2.0 kZ:0.9
+launch --rewgt_name=scan_kW_2p0_kZ_0p9
+set higgscoup 1 2.0 # kW
+set higgscoup 2 0.9 # kZ
+
+#[230/288] kW:-2.0 kZ:-0.7
+launch --rewgt_name=scan_kW_m2p0_kZ_m0p7
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[231/288] kW:-1.0 kZ:-0.7
+launch --rewgt_name=scan_kW_m1p0_kZ_m0p7
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -0.7 # kZ
+
+#[232/288] kW:0.7 kZ:1.4
+launch --rewgt_name=scan_kW_0p7_kZ_1p4
+set higgscoup 1 0.7 # kW
+set higgscoup 2 1.4 # kZ
+
+#[233/288] kW:-0.3 kZ:-1.1
+launch --rewgt_name=scan_kW_m0p3_kZ_m1p1
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[234/288] kW:1.1 kZ:1.4
+launch --rewgt_name=scan_kW_1p1_kZ_1p4
+set higgscoup 1 1.1 # kW
+set higgscoup 2 1.4 # kZ
+
+#[235/288] kW:1.1 kZ:0.6
+launch --rewgt_name=scan_kW_1p1_kZ_0p6
+set higgscoup 1 1.1 # kW
+set higgscoup 2 0.6 # kZ
+
+#[236/288] kW:-0.9 kZ:-1.1
+launch --rewgt_name=scan_kW_m0p9_kZ_m1p1
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[237/288] kW:-1.2 kZ:-2.0
+launch --rewgt_name=scan_kW_m1p2_kZ_m2p0
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[238/288] kW:-1.2 kZ:-1.0
+launch --rewgt_name=scan_kW_m1p2_kZ_m1p0
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[239/288] kW:1.2 kZ:1.3
+launch --rewgt_name=scan_kW_1p2_kZ_1p3
+set higgscoup 1 1.2 # kW
+set higgscoup 2 1.3 # kZ
+
+#[240/288] kW:1.4 kZ:0.3
+launch --rewgt_name=scan_kW_1p4_kZ_0p3
+set higgscoup 1 1.4 # kW
+set higgscoup 2 0.3 # kZ
+
+#[241/288] kW:-0.6 kZ:-0.8
+launch --rewgt_name=scan_kW_m0p6_kZ_m0p8
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[242/288] kW:-1.3 kZ:-1.3
+launch --rewgt_name=scan_kW_m1p3_kZ_m1p3
+set higgscoup 1 -1.3 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[243/288] kW:1.4 kZ:0.8
+launch --rewgt_name=scan_kW_1p4_kZ_0p8
+set higgscoup 1 1.4 # kW
+set higgscoup 2 0.8 # kZ
+
+#[244/288] kW:-1.4 kZ:-2.0
+launch --rewgt_name=scan_kW_m1p4_kZ_m2p0
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[245/288] kW:0.9 kZ:0.7
+launch --rewgt_name=scan_kW_0p9_kZ_0p7
+set higgscoup 1 0.9 # kW
+set higgscoup 2 0.7 # kZ
+
+#[246/288] kW:-1.4 kZ:-1.0
+launch --rewgt_name=scan_kW_m1p4_kZ_m1p0
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[247/288] kW:-1.7 kZ:-1.1
+launch --rewgt_name=scan_kW_m1p7_kZ_m1p1
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -1.1 # kZ
+
+#[248/288] kW:-0.6 kZ:-0.3
+launch --rewgt_name=scan_kW_m0p6_kZ_m0p3
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[249/288] kW:-1.1 kZ:-0.6
+launch --rewgt_name=scan_kW_m1p1_kZ_m0p6
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[250/288] kW:-1.1 kZ:-1.4
+launch --rewgt_name=scan_kW_m1p1_kZ_m1p4
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[251/288] kW:0.3 kZ:0.7
+launch --rewgt_name=scan_kW_0p3_kZ_0p7
+set higgscoup 1 0.3 # kW
+set higgscoup 2 0.7 # kZ
+
+#[252/288] kW:1.7 kZ:1.1
+launch --rewgt_name=scan_kW_1p7_kZ_1p1
+set higgscoup 1 1.7 # kW
+set higgscoup 2 1.1 # kZ
+
+#[253/288] kW:-1.4 kZ:-1.7
+launch --rewgt_name=scan_kW_m1p4_kZ_m1p7
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -1.7 # kZ
+
+#[254/288] kW:-1.4 kZ:-1.2
+launch --rewgt_name=scan_kW_m1p4_kZ_m1p2
+set higgscoup 1 -1.4 # kW
+set higgscoup 2 -1.2 # kZ
+
+#[255/288] kW:-1.7 kZ:-0.8
+launch --rewgt_name=scan_kW_m1p7_kZ_m0p8
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -0.8 # kZ
+
+#[256/288] kW:-0.8 kZ:-1.4
+launch --rewgt_name=scan_kW_m0p8_kZ_m1p4
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[257/288] kW:-0.8 kZ:-0.6
+launch --rewgt_name=scan_kW_m0p8_kZ_m0p6
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[258/288] kW:2.0 kZ:1.1
+launch --rewgt_name=scan_kW_2p0_kZ_1p1
+set higgscoup 1 2.0 # kW
+set higgscoup 2 1.1 # kZ
+
+#[259/288] kW:-1.7 kZ:-0.3
+launch --rewgt_name=scan_kW_m1p7_kZ_m0p3
+set higgscoup 1 -1.7 # kW
+set higgscoup 2 -0.3 # kZ
+
+#[260/288] kW:-1.2 kZ:-1.3
+launch --rewgt_name=scan_kW_m1p2_kZ_m1p3
+set higgscoup 1 -1.2 # kW
+set higgscoup 2 -1.3 # kZ
+
+#[261/288] kW:-0.3 kZ:-0.9
+launch --rewgt_name=scan_kW_m0p3_kZ_m0p9
+set higgscoup 1 -0.3 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[262/288] kW:0.8 kZ:1.2
+launch --rewgt_name=scan_kW_0p8_kZ_1p2
+set higgscoup 1 0.8 # kW
+set higgscoup 2 1.2 # kZ
+
+#[263/288] kW:0.8 kZ:1.7
+launch --rewgt_name=scan_kW_0p8_kZ_1p7
+set higgscoup 1 0.8 # kW
+set higgscoup 2 1.7 # kZ
+
+#[264/288] kW:0.8 kZ:0.9
+launch --rewgt_name=scan_kW_0p8_kZ_0p9
+set higgscoup 1 0.8 # kW
+set higgscoup 2 0.9 # kZ
+
+#[265/288] kW:1.3 kZ:0.3
+launch --rewgt_name=scan_kW_1p3_kZ_0p3
+set higgscoup 1 1.3 # kW
+set higgscoup 2 0.3 # kZ
+
+#[266/288] kW:1.4 kZ:1.0
+launch --rewgt_name=scan_kW_1p4_kZ_1p0
+set higgscoup 1 1.4 # kW
+set higgscoup 2 1.0 # kZ
+
+#[267/288] kW:0.9 kZ:1.4
+launch --rewgt_name=scan_kW_0p9_kZ_1p4
+set higgscoup 1 0.9 # kW
+set higgscoup 2 1.4 # kZ
+
+#[268/288] kW:-0.9 kZ:-0.9
+launch --rewgt_name=scan_kW_m0p9_kZ_m0p9
+set higgscoup 1 -0.9 # kW
+set higgscoup 2 -0.9 # kZ
+
+#[269/288] kW:1.3 kZ:0.8
+launch --rewgt_name=scan_kW_1p3_kZ_0p8
+set higgscoup 1 1.3 # kW
+set higgscoup 2 0.8 # kZ
+
+#[270/288] kW:0.3 kZ:1.4
+launch --rewgt_name=scan_kW_0p3_kZ_1p4
+set higgscoup 1 0.3 # kW
+set higgscoup 2 1.4 # kZ
+
+#[271/288] kW:1.2 kZ:0.7
+launch --rewgt_name=scan_kW_1p2_kZ_0p7
+set higgscoup 1 1.2 # kW
+set higgscoup 2 0.7 # kZ
+
+#[272/288] kW:0.7 kZ:0.3
+launch --rewgt_name=scan_kW_0p7_kZ_0p3
+set higgscoup 1 0.7 # kW
+set higgscoup 2 0.3 # kZ
+
+#[273/288] kW:1.3 kZ:1.1
+launch --rewgt_name=scan_kW_1p3_kZ_1p1
+set higgscoup 1 1.3 # kW
+set higgscoup 2 1.1 # kZ
+
+#[274/288] kW:0.7 kZ:0.8
+launch --rewgt_name=scan_kW_0p7_kZ_0p8
+set higgscoup 1 0.7 # kW
+set higgscoup 2 0.8 # kZ
+
+#[275/288] kW:1.0 kZ:0.7
+launch --rewgt_name=scan_kW_1p0_kZ_0p7
+set higgscoup 1 1.0 # kW
+set higgscoup 2 0.7 # kZ
+
+#[276/288] kW:-1.1 kZ:-2.0
+launch --rewgt_name=scan_kW_m1p1_kZ_m2p0
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[277/288] kW:-1.1 kZ:-1.0
+launch --rewgt_name=scan_kW_m1p1_kZ_m1p0
+set higgscoup 1 -1.1 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[278/288] kW:-0.8 kZ:-2.0
+launch --rewgt_name=scan_kW_m0p8_kZ_m2p0
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -2.0 # kZ
+
+#[279/288] kW:1.0 kZ:1.0
+launch --rewgt_name=scan_kW_1p0_kZ_1p0
+set higgscoup 1 1.0 # kW
+set higgscoup 2 1.0 # kZ
+
+#[280/288] kW:-0.8 kZ:-1.0
+launch --rewgt_name=scan_kW_m0p8_kZ_m1p0
+set higgscoup 1 -0.8 # kW
+set higgscoup 2 -1.0 # kZ
+
+#[281/288] kW:-2.0 kZ:-0.6
+launch --rewgt_name=scan_kW_m2p0_kZ_m0p6
+set higgscoup 1 -2.0 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[282/288] kW:-1.0 kZ:-0.6
+launch --rewgt_name=scan_kW_m1p0_kZ_m0p6
+set higgscoup 1 -1.0 # kW
+set higgscoup 2 -0.6 # kZ
+
+#[283/288] kW:-0.6 kZ:-1.4
+launch --rewgt_name=scan_kW_m0p6_kZ_m1p4
+set higgscoup 1 -0.6 # kW
+set higgscoup 2 -1.4 # kZ
+
+#[284/288] kW:1.2 kZ:1.4
+launch --rewgt_name=scan_kW_1p2_kZ_1p4
+set higgscoup 1 1.2 # kW
+set higgscoup 2 1.4 # kZ
+
+#[285/288] kW:0.6 kZ:1.3
+launch --rewgt_name=scan_kW_0p6_kZ_1p3
+set higgscoup 1 0.6 # kW
+set higgscoup 2 1.3 # kZ
+
+#[286/288] kW:1.1 kZ:0.7
+launch --rewgt_name=scan_kW_1p1_kZ_0p7
+set higgscoup 1 1.1 # kW
+set higgscoup 2 0.7 # kZ
+
+#[287/288] kW:0.7 kZ:1.0
+launch --rewgt_name=scan_kW_0p7_kZ_1p0
+set higgscoup 1 0.7 # kW
+set higgscoup 2 1.0 # kZ
+
+#[288/288] kW:-0.7 kZ:-0.9
+launch --rewgt_name=scan_kW_m0p7_kZ_m0p9
+set higgscoup 1 -0.7 # kW
+set higgscoup 2 -0.9 # kZ
