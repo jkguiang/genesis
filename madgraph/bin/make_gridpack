@@ -623,7 +623,7 @@ TEMP=`getopt -o hn:m:q:j: --long help,name:,modelsdir:,queue:,jobstep:,scram:,cm
 eval set -- "$TEMP"
 # Extract options and their arguments
 name=""
-modelsdir=""
+modelsdir="models"
 queue=""
 jobstep="ALL"
 scram_arch=slc7_amd64_gcc700 # old: slc6_amd64_gcc630 
