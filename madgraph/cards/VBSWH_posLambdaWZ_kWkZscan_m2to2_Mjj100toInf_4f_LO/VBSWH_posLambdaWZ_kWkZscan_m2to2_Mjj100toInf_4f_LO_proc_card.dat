@@ -1,7 +1,0 @@
-import model sm_kwkz
-
-define w = w+ w-
-
-generate p p > w h j j QCD=0
-
-output VBSWH_posLambdaWZ_kWkZscan_m2to2_Mjj100toInf_4f_LO -nojpeg
